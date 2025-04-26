@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df47eaa9e45768b4b9e52a6e586a5f74, type: 3}
+  m_Name: NaOH
+  m_EditorClassIdentifier: 
+  chemicalName: Natrium Hidroksida
+  formula: NaOH
+  type: 1
+  strength: 1
+  concentration: 1
+  molarMass: 40
+  Ka: 0
+  Kb: 1000000
+  description: 'Ini adalah larutan Natrium Hidroksida (NaOH), basa kuat yang sangat
+    korosif. Biasa disebut soda api, cairan ini bisa menyebabkan iritasi parah pada
+    kulit dan mata.
+
+
+    NaOH banyak digunakan dalam industri sabun, pembersih,
+    dan pengolahan limbah. Dalam air, ia terurai sempurna dan menghasilkan larutan
+    dengan pH sangat tinggi (basa kuat).'
+  audioDescription: {fileID: 8300000, guid: 72b371d57d45d674189c48412ded5b4c, type: 3}

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df47eaa9e45768b4b9e52a6e586a5f74, type: 3}
+  m_Name: CH3COOH
+  m_EditorClassIdentifier: 
+  chemicalName: Asam Asetat
+  formula: CH3COOH
+  type: 0
+  strength: 0
+  concentration: 1
+  molarMass: 60.05
+  Ka: 0.000018
+  Kb: 0
+  description: "Ini adalah larutan Asam Asetat (CH\u2083COOH), asam lemah yang jadi
+    komponen utama cuka. Bersifat asam (pH rendah). Aromanya khas dan tidak sepenuhnya
+    terurai dalam air, jadi sifat asamnya lebih ringan.\n\nMeski tak sekuat asam
+    kuat, larutan pekatnya tetap bisa mengiritasi kulit dan mata. Umumnya dipakai
+    untuk pengawetan makanan, bahan kimia, dan pembersih alami."
+  audioDescription: {fileID: 8300000, guid: fd8b04d2292e9744cb0a9f4920dbfbdd, type: 3}

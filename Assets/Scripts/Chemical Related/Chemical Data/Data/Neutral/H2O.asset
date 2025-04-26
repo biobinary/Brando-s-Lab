@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df47eaa9e45768b4b9e52a6e586a5f74, type: 3}
+  m_Name: H2O
+  m_EditorClassIdentifier: 
+  chemicalName: Air
+  formula: H20
+  type: 2
+  strength: 2
+  concentration: 1
+  molarMass: 18.02
+  Ka: 0
+  Kb: 0
+  description: "Ini adalah air (H\u2082O), cairan netral yang jadi pelarut universal
+    dalam banyak reaksi kimia. Tidak berbahaya, tidak berwarna, tidak berbau, dan
+    penting bagi semua bentuk kehidupan.\n\nAir punya pH netral (sekitar 7) dan sering
+    digunakan untuk melarutkan zat atau membilas peralatan laboratorium. Aman disentuh
+    dan diminum dalam kondisi bersih."
+  audioDescription: {fileID: 8300000, guid: 6823091f9905fd0449ea14ff331dda61, type: 3}
