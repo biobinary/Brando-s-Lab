@@ -4,10 +4,12 @@ using UnityEngine;
 public class PlaygroundEnvironmentManager : MonoBehaviour {
 
 	public static PlaygroundEnvironmentManager Instance;
+	public event System.Action<PlaygroundEnvironment> OnLoadEnvironment;
+	public event System.Action OnDestroyEnvironment;
+	public event System.Action OnResetEnvironment;
 
-	[Header("UI References")]
-	[SerializeField] private GameObject m_playgroundSelectionButtons;
-	[SerializeField] private GameMenu m_gameMenuPanel;
+	[Header("Playground Selection UI")]
+	[SerializeField] private GameObject m_playgroundSelection;
 
 	[Header("Environments")]
 	[SerializeField] private List<PlaygroundEnvironment> m_environments;
@@ -34,8 +36,7 @@ public class PlaygroundEnvironmentManager : MonoBehaviour {
 	}
 
 	private void Start() {
-		HideGamePanel();
-
+		m_playgroundSelection.SetActive(true);
 	}
 
 	public void LoadEnvironment(int environmentIdx) {
@@ -46,10 +47,14 @@ public class PlaygroundEnvironmentManager : MonoBehaviour {
 		IsOnProgress = true;
 		m_currentEnvironment = m_environments[environmentIdx];
 
-		System.Action onFinished = () => { IsOnProgress = false; };
-		m_currentEnvironment.Load(onFinished);
+		System.Action onFinished = () => { 
+			IsOnProgress = false;
+			OnLoadEnvironment?.Invoke( m_currentEnvironment );
+		};
 		
-		ShowGamePanel();
+		m_currentEnvironment.Load(onFinished);
+
+		m_playgroundSelection.SetActive(false);
 
 	}
 
@@ -59,7 +64,12 @@ public class PlaygroundEnvironmentManager : MonoBehaviour {
 			return;
 
 		IsOnProgress = true;
-		System.Action onFinished = () => { IsOnProgress = false; };
+		
+		System.Action onFinished = () => { 
+			IsOnProgress = false;
+			OnResetEnvironment?.Invoke();
+		};
+
 		m_currentEnvironment.Reset(onFinished);
 
 	}
@@ -72,22 +82,13 @@ public class PlaygroundEnvironmentManager : MonoBehaviour {
 		IsOnProgress = true;
 
 		System.Action onFinished = () => {
-			HideGamePanel();
 			IsOnProgress = false;
+			m_playgroundSelection.SetActive(true);
+			OnDestroyEnvironment?.Invoke();
 		};
 
 		m_currentEnvironment.Clear(onFinished);
 
-	}
-
-	private void ShowGamePanel() {
-		m_playgroundSelectionButtons.SetActive(false);
-		m_gameMenuPanel.gameObject.SetActive(true);
-	}
-
-	private void HideGamePanel() {
-		m_playgroundSelectionButtons.SetActive(true);
-		m_gameMenuPanel.gameObject.SetActive(false);
 	}
 
 }

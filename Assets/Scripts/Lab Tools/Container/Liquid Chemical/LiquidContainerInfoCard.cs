@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class LiquidContainerInfoCard : ContainerInfoCard<ChemicalData> {
 
-	protected override void SetupLabel() {
+	protected override void SetupLabel() {		
 
 		List<ChemicalPortion<ChemicalData>> chems = m_mainContainer.GetChemicalContents();
 		ChemicalData chemicalData = chems?.Count > 0 ? chems[0].data : null;

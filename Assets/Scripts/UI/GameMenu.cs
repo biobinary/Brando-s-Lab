@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour {
 
+	[SerializeField] private GameObject m_canvasRoot;
 	[SerializeField] private GameObject m_settingsContent;
 
 	[Header("Environtment Information")]
@@ -22,27 +23,30 @@ public class GameMenu : MonoBehaviour {
 		m_backToSelectionButton.onValueChanged.AddListener((value) => 
 			PlaygroundEnvironmentManager.Instance.ClearEnvironment());
 
+		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
+		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
+
 	}
 
-	private void OnEnable() {
+	private void Start() {
+		m_canvasRoot.SetActive(false);
+	}
+
+	private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
 		
+		m_canvasRoot.SetActive(true);
 		m_environmentInformationContent.SetActive(true);
-		m_settingsContent.SetActive(false);
 
-		if (PlaygroundEnvironmentManager.Instance != null) { 
-			
-			PlaygroundEnvironment currentEnv = PlaygroundEnvironmentManager.Instance.GetCurrentEnvironment();
-			
-			if (currentEnv != null) { 
-				m_environtmentInformationTitle.text = currentEnv.gameObject.name;			
-			
-			} else {
-				m_environtmentInformationTitle.text = "Unknown Environtment";
-			
-			}
+		if( env != null )
+			m_environtmentInformationTitle.text = env.gameObject.name;
+		else
+			m_environtmentInformationTitle.text = "Unknown Environtment";
 
-		}
+	}
 
+	private void OnEnvironmentDestroyed() {
+		m_canvasRoot.SetActive(false);
+	
 	}
 
 }
