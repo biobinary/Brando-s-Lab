@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66e8825da6e054db1e9562ecc31908, type: 3}
   m_Name: SrCl2
   m_EditorClassIdentifier: 
-  metalSaltName: Stronsium Klorida
-  chemicalFormula: SrCl2
-  flameColor: {r: 1, g: 0, b: 0, a: 1}
+  chemicalName: Stronsium Klorida
+  formula: SrCl2
   description: Nyala merah menyala khas strontium. Penting dalam sistem sinyal bahaya
     maritim.
   audioDescription: {fileID: 0}
+  flameColor: {r: 1, g: 0, b: 0, a: 1}

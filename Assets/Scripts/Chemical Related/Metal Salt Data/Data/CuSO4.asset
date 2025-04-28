@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66e8825da6e054db1e9562ecc31908, type: 3}
   m_Name: CuSO4
   m_EditorClassIdentifier: 
-  metalSaltName: Tembaga Sulfat
-  chemicalFormula: CuSO4
-  flameColor: {r: 0, g: 1, b: 0.53333336, a: 1}
+  chemicalName: Tembaga Sulfat
+  formula: CuSO4
   description: Ion tembaga menghasilkan nyala hijau kebiruan. Sering dipakai dalam
     seni pyrotechnic.
   audioDescription: {fileID: 8300000, guid: 873b2c365a801ad4dbd56ac2ef26fcfc, type: 3}
+  flameColor: {r: 0, g: 1, b: 0.53333336, a: 1}

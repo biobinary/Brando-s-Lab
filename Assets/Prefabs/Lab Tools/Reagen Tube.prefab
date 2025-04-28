@@ -311,10 +311,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointable: {fileID: 21986978156599638}
+  m_containerMonoBehaviour: {fileID: 1235712879266090285}
   m_canvasGameObject: {fileID: 734045904101073514}
   m_primaryLabel: {fileID: 4775510027975765278}
   m_secondaryLabel: {fileID: 8156224650603513704}
-  m_containerMonoBehaviour: {fileID: 1235712879266090285}
 --- !u!1 &1590746834910451536
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chemicalContainer: {fileID: 1235712879266090285}
+  m_playgroundObjectives: {fileID: 11400000, guid: e40d7e8bf33243845ad2c7e5d08b46d0, type: 2}
 --- !u!114 &7335959416954414452
 MonoBehaviour:
   m_ObjectHideFlags: 0

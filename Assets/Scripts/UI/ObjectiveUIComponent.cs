@@ -12,4 +12,8 @@ public class ObjectiveUIComponent : MonoBehaviour {
 		m_instructionLabel.text = instructionLabel;
 	}
 
+	public void SetCheckBox(bool isOn) { 
+		m_checkBox.isOn = isOn;
+	}
+
 }

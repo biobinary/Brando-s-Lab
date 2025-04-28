@@ -10,7 +10,7 @@ public class MetalSaltInfoCard : ContainerInfoCard<MetalSaltData> {
 		if (salt != null && salt.hasBeenExplained) {
 
 			if (m_primaryLabel != null)
-				m_primaryLabel.text = salt.name;
+				m_primaryLabel.text = salt.formula;
 
 			if( m_secondaryLabel != null )
 				m_secondaryLabel.text = salt.GetColorName();

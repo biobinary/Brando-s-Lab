@@ -19,6 +19,9 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 	[SerializeField] private GameObject m_fireEffect;
 	[SerializeField] private float m_maxFireTimeout = 8.0f;
 
+	[Header("Objectives")]
+	public PlaygroundObjective m_playgroundObjective;
+
 	private bool m_isOnFire = false;
 	private Coroutine m_onFireCoroutine = null;
 
@@ -172,12 +175,55 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 			fireController.SetFireColor(currentSalt.data.flameColor);
 			fireController.SetFireIntensity(fireStrength);
 
+			CheckColorObjectives(currentSalt.data.GetColorName());
+
 			yield return new WaitForSeconds(m_maxFireTimeout * fireStrength);
 
 			HandleFireTimeout();
 
 		} else {
 			m_onFireCoroutine = null;
+
+		}
+
+	}
+
+	private void CheckColorObjectives(string colorName) {
+
+		switch(colorName) {
+			
+			case "Merah":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Merah");
+				break;
+			
+			case "Kuning":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Kuning");
+				break;
+			
+			case "Oren":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Oren");
+				break;
+
+			case "Hijau":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Hijau");
+				break;
+
+			case "Cyan":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Cyan");
+				break;
+
+			case "Biru":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Biru");
+				break;
+
+			case "Ungu":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Ungu");
+				break;
+
+			case "Magenta":
+				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Magenta");
+				break;
+
 
 		}
 

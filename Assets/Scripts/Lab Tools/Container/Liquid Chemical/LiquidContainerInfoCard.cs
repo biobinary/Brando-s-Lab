@@ -10,7 +10,7 @@ public class LiquidContainerInfoCard : ContainerInfoCard<ChemicalData> {
 		if (chemicalData != null && chemicalData.hasBeenExplained) {
 
 			if (m_primaryLabel != null)
-				m_primaryLabel.text = chemicalData.name;
+				m_primaryLabel.text = chemicalData.formula;
 
 			if (m_secondaryLabel != null)
 				m_secondaryLabel.text = GetChemicalDescription(chemicalData);

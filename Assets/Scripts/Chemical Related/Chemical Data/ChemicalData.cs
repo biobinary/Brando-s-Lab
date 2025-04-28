@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "ChemicalData", menuName = "Scriptable Objects/Chemical Data")]
-public class ChemicalData : ScriptableObject, IExplainableChemical {
-
-	public bool hasBeenExplained { get; set; } = false;
-	AudioClip IExplainableChemical.audioDescription { get => audioDescription; }
+public class ChemicalData : ChemicalBaseData {
 
 	public enum Type {
         ACID, 
@@ -18,10 +15,6 @@ public class ChemicalData : ScriptableObject, IExplainableChemical {
         NONE
     }
 
-	[Header("Chemical Identity")]
-	public string chemicalName;
-    public string formula;
-
 	[Header("Chemical Properties")]
 	public Type type;
 	public Strength strength;
@@ -33,10 +26,6 @@ public class ChemicalData : ScriptableObject, IExplainableChemical {
 	public float Ka = 0f;
 	[Tooltip("Kb value for bases (e.g. 1.8e-5 for ammonia)")]
 	public float Kb = 0f;
-
-	[Header("Description")]
-    [TextArea(1, 10)] public string description;
-	public AudioClip audioDescription;
 
 	private void OnEnable() {
 		hasBeenExplained = false;

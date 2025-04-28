@@ -18,6 +18,13 @@ public class PlaygroundEnvironment : MonoBehaviour {
 	private Dictionary<GameObject, EnvironmentObjectTransformData> m_environmentObjects = 
 		new Dictionary<GameObject, EnvironmentObjectTransformData>();
 
+	private void Awake() {
+		
+		if (m_objective != null)
+			m_objective.ResetAllObjectives();
+
+	}
+
 	private void Start() {
 
 		foreach (Transform child in transform) {

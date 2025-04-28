@@ -31,6 +31,7 @@ public class NPCProfessorVision : MonoBehaviour {
 
 		}
 
+		Debug.Log("========== HERE =========");
 		m_currentObjectTimeout += Time.deltaTime;
 
 		if (m_currentObjectTimeout > m_waitUntilExplainTime) {
@@ -72,6 +73,7 @@ public class NPCProfessorVision : MonoBehaviour {
 	}
 
 	private void ExplainObject() {
+		Debug.Log("========= YUPPPPP============");
 		NPCProfessor.Instance.PlayMonologue(m_selectedExplainableObject.GetExplanationVoiceOverClip());
 		ResetSelection();
 	}

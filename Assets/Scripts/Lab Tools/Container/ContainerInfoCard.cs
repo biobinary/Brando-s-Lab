@@ -2,7 +2,7 @@ using Oculus.Interaction;
 using TMPro;
 using UnityEngine;
 
-public abstract class ContainerInfoCard<T> : MonoBehaviour where T : ScriptableObject {
+public abstract class ContainerInfoCard<T> : MonoBehaviour where T : ChemicalBaseData {
 
 	[SerializeField, Interface(typeof(IPointable))]
 	protected UnityEngine.Object _pointable;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PourInteraction<T> : MonoBehaviour where T : ScriptableObject {
+public abstract class PourInteraction<T> : MonoBehaviour where T : ChemicalBaseData {
 
 	[SerializeField] protected MonoBehaviour m_containerMonoBehaviour;
 	[SerializeField] protected float m_pourRadius = 1.0f;

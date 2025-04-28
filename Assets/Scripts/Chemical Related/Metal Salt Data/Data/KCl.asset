@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66e8825da6e054db1e9562ecc31908, type: 3}
   m_Name: KCl
   m_EditorClassIdentifier: 
-  metalSaltName: Potasium Klorida
-  chemicalFormula: KCl
-  flameColor: {r: 0.8, g: 0.53333336, b: 1, a: 1}
+  chemicalName: Potasium Klorida
+  formula: KCl
   description: Nyala ungu lembut khas kalium. Warna ini mudah tertutup oleh logam
     lain jika tidak diamati hati-hati.
   audioDescription: {fileID: 8300000, guid: ea72d0cc099fd2640929da098953fb21, type: 3}
+  flameColor: {r: 0.8, g: 0.53333336, b: 1, a: 1}

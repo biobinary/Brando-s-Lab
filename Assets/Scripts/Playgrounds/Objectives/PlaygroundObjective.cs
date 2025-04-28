@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlaygroundObjective", menuName = "Scriptable Objects/Playground Objective")]
 public class PlaygroundObjective : ScriptableObject {
 
-	public event System.Action OnObjectiveCompletionUpdated;
+	public event System.Action OnObjectiveCompleted;
 
 	[System.Serializable]
 	public class ObjectiveInstruction {
@@ -19,8 +19,11 @@ public class PlaygroundObjective : ScriptableObject {
 
 	public List<ObjectiveInstruction> GetObjectives() => m_instructionList;
 
-	private void OnEnable() {
-		
+	public void ResetAllObjectives() {
+
+		if (m_instructionList == null || !(m_instructionList.Count > 0))
+			return;
+
 		foreach (ObjectiveInstruction instruction in m_instructionList) {
 			instruction.isComplete = false;
 		}
@@ -29,7 +32,11 @@ public class PlaygroundObjective : ScriptableObject {
 
 	public void SetCompletion(string instruction) {
 
-		if (string.IsNullOrEmpty(instruction)) return;
+		if (string.IsNullOrEmpty(instruction))
+			return;
+
+		if (HasCompleted(instruction))
+			return;
 
 		ObjectiveInstruction currentObjective = null;
 
@@ -42,21 +49,24 @@ public class PlaygroundObjective : ScriptableObject {
 
 		if( currentObjective != null ) {
 			currentObjective.isComplete = true;
-			OnObjectiveCompletionUpdated.Invoke();
+			OnObjectiveCompleted.Invoke();
 		}
 			
 	}
 
 	public void SetCompletion(int idx) {
 
-		if (idx < m_instructionList.Count || idx >= m_instructionList.Count)
+		if (idx < 0 || idx >= m_instructionList.Count)
+			return;
+
+		if (HasCompleted(idx))
 			return;
 
 		ObjectiveInstruction currentObjective = m_instructionList[idx];
 
 		if (currentObjective != null) {
 			currentObjective.isComplete = true;
-			OnObjectiveCompletionUpdated.Invoke();
+			OnObjectiveCompleted.Invoke();
 		}
 
 	}
@@ -85,7 +95,7 @@ public class PlaygroundObjective : ScriptableObject {
 
 	public AudioClip GetAudioHint(int idx) {
 		
-		if (idx < m_instructionList.Count || idx >= m_instructionList.Count)
+		if (idx < 0 || idx >= m_instructionList.Count)
 			return null;
 
 		ObjectiveInstruction currentObjective = m_instructionList[idx];
@@ -95,6 +105,41 @@ public class PlaygroundObjective : ScriptableObject {
 		}
 
 		return null;
+
+	}
+
+	public bool HasCompleted(string instruction) {
+
+		if (string.IsNullOrEmpty(instruction))
+			return false;
+
+		ObjectiveInstruction currentObjective = null;
+
+		foreach (ObjectiveInstruction objective in m_instructionList) {
+			if (string.Equals(objective.instructions, instruction)) {
+				currentObjective = objective;
+				break;
+			}
+		}
+
+		if (currentObjective != null)
+			return currentObjective.isComplete;
+
+		return false;
+
+	}
+
+	public bool HasCompleted(int idx) {
+
+		if (idx < 0 || idx >= m_instructionList.Count)
+			return false;
+
+		ObjectiveInstruction currentObjective = m_instructionList[idx];
+
+		if (currentObjective != null)
+			return currentObjective.isComplete;
+
+		return false;
 
 	}
 

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66e8825da6e054db1e9562ecc31908, type: 3}
   m_Name: NaCl
   m_EditorClassIdentifier: 
-  metalSaltName: Natrium klorida
-  chemicalFormula: NaCl
-  flameColor: {r: 1, g: 1, b: 0, a: 1}
+  chemicalName: Natrium klorida
+  formula: NaCl
   description: Garam dapur ini menghasilkan nyala kuning khas. Contoh nyata spektrum
     emisi logam alkali.
   audioDescription: {fileID: 8300000, guid: e5791f1ee325c7742862d062088224f1, type: 3}
+  flameColor: {r: 1, g: 1, b: 0, a: 1}

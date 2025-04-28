@@ -42,7 +42,8 @@ public class MetalSaltContainer : MonoBehaviour, IChemicalContainer<MetalSaltDat
 
 		List<ChemicalPortion<MetalSaltData>> removedSalts = new();
         foreach (ChemicalPortion<MetalSaltData> salt in m_salts) {
-			ChemicalPortion<MetalSaltData> newPortion = salt;
+			ChemicalPortion<MetalSaltData> newPortion = new();
+			newPortion.data = salt.data;
 			newPortion.volume = volume;
 			removedSalts.Add(newPortion);
         }

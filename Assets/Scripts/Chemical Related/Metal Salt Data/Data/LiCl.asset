@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66e8825da6e054db1e9562ecc31908, type: 3}
   m_Name: LiCl
   m_EditorClassIdentifier: 
-  metalSaltName: Litium klorida
-  chemicalFormula: LiCl
-  flameColor: {r: 1, g: 0, b: 0.4, a: 1}
+  chemicalName: Litium klorida
+  formula: LiCl
   description: Ion lithium menghasilkan warna merah terang saat dibakar. Warna ini
     sering dipakai dalam kembang api.
   audioDescription: {fileID: 0}
+  flameColor: {r: 1, g: 0, b: 0.4, a: 1}
