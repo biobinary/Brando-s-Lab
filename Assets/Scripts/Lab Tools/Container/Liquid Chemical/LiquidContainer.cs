@@ -93,7 +93,7 @@ public class LiquidContainer : MonoBehaviour, IPourable<ChemicalData>, IChemical
 		}
 
 		m_currentVolume += currentAddedVolume;
-		m_targetPH = PHManager.CalCulatePH(m_contents.Values.ToList(), m_currentVolume);
+		m_targetPH = PHManager.CalCulatePH(GetChemicalContents(), m_currentVolume);
 		m_targetColor = PHManager.GetPHColor(m_targetPH);
 
 	}
@@ -140,7 +140,7 @@ public class LiquidContainer : MonoBehaviour, IPourable<ChemicalData>, IChemical
 		m_currentVolume -= volume;
 		m_currentVolume = Mathf.Max(0, m_currentVolume);
 
-		m_targetPH = PHManager.CalCulatePH(m_contents.Values.ToList(), m_currentVolume);
+		m_targetPH = PHManager.CalCulatePH(GetChemicalContents(), m_currentVolume);
 		m_targetColor = PHManager.GetPHColor(m_targetPH);
 
 		OnHandleRefillCallback(true);

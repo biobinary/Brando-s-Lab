@@ -20,30 +20,6 @@ public class GasLighter : TriggerBasedTool {
 		m_shapeModule = m_fireEffect.shape;
 	}
 
-	protected override void Update() {
-
-		base.Update();
-
-		if ( m_currentControllerRef == null || 
-			 !m_currentControllerRef.ControllerInput.TriggerButton) {
-			
-			if (m_currentBurnable != null) {
-				m_currentBurnable.StopBurning();
-				m_currentBurnable = null;
-			}
-
-			m_triggerGameObject.transform.localPosition = new Vector3(
-				m_triggerGameObject.transform.localPosition.x,
-				m_triggerGameObject.transform.localPosition.y,
-				m_triggerInitalPosition
-			);
-
-			m_fireEffect.Stop();
-		
-		}
-
-	}
-
 	protected override void OnHandleTriggerPressed() {
 
 		m_triggerGameObject.transform.localPosition = new Vector3(
@@ -54,6 +30,23 @@ public class GasLighter : TriggerBasedTool {
 
 		m_fireEffect.Play();
 		CastFire();
+
+	}
+
+	protected override void OnHandleTriggerReleased() {
+
+		if (m_currentBurnable != null) {
+			m_currentBurnable.StopBurning();
+			m_currentBurnable = null;
+		}
+
+		m_triggerGameObject.transform.localPosition = new Vector3(
+			m_triggerGameObject.transform.localPosition.x,
+			m_triggerGameObject.transform.localPosition.y,
+			m_triggerInitalPosition
+		);
+
+		m_fireEffect.Stop();
 
 	}
 

@@ -5385,13 +5385,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c5f1509db54a640800373f98ee6642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_containerMonoBehaviour: {fileID: 3032726707559790903}
   m_pourRadius: 0.048
   m_pourRate: 10
   m_pourParticles: {fileID: 8512844077642284911}
   m_pourLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  m_containerMonoBehaviour: {fileID: 7705720055715199162}
 --- !u!1 &8989859310613719815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5402,8 +5402,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1370361747366642854}
   - component: {fileID: 1318055271960389864}
-  - component: {fileID: 7705720055715199162}
   - component: {fileID: 3032726707559790903}
+  - component: {fileID: 7705720055715199162}
   m_Layer: 6
   m_Name: Beaker
   m_TagString: Tools
@@ -5458,6 +5458,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &3032726707559790903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8989859310613719815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9984ec5e95ae6674d81ed5309e5fbdd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_canFill: 1
+  m_canRefill: 0
+  m_refillDelay: 3
+  m_refillRate: 0.8
+  m_initialChemical: []
+  m_maxVolume: 50
+  m_chemicalReactionSpeed: 5
+  m_rendererLimitBounds: {x: 0.15, y: 0.8}
+  m_solutionRenderer: {fileID: 8815513287428867856}
+  m_pourParticles: {fileID: 8512844077642284911}
 --- !u!114 &7705720055715199162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5516,28 +5538,6 @@ MonoBehaviour:
   _whenCancel:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3032726707559790903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8989859310613719815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9984ec5e95ae6674d81ed5309e5fbdd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_canFill: 1
-  m_canRefill: 0
-  m_refillDelay: 3
-  m_refillRate: 0.8
-  m_initialChemical: []
-  m_maxVolume: 50
-  m_chemicalReactionSpeed: 5
-  m_rendererLimitBounds: {x: 0.15, y: 0.8}
-  m_solutionRenderer: {fileID: 8815513287428867856}
-  m_pourParticles: {fileID: 8512844077642284911}
 --- !u!1001 &2525901069627717687
 PrefabInstance:
   m_ObjectHideFlags: 0

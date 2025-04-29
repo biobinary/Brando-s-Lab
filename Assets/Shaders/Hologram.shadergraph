@@ -2142,7 +2142,7 @@
     "m_ObjectId": "30f474db1a7d4ff4b067fb739d393bdb",
     "m_Title": "Fresnel Outline",
     "m_Position": {
-        "x": -1010.4000244140625,
+        "x": -1010.39990234375,
         "y": 16.7999267578125
     }
 }
@@ -2190,7 +2190,7 @@
     "m_Title": "Add horizontal noise in view space",
     "m_Position": {
         "x": -2064.0,
-        "y": -752.7999877929688
+        "y": -752.800048828125
     }
 }
 
@@ -5204,7 +5204,7 @@
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
     "m_ZTestMode": 4,
-    "m_ZWriteControl": 0,
+    "m_ZWriteControl": 1,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": false,

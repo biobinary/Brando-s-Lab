@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chemicalName: Asam Klorida
   formula: HCl
-  type: 0
-  strength: 1
-  concentration: 1
-  molarMass: 36.46
-  Ka: 1300000
-  Kb: 0
   description: Larutan yang kamu pegang itu adalah HCl, atau asam klorida. Ini termasuk
     asam kuat yang mudah terionisasi di air. Biasanya digunakan di laboratorium sebagai
     pembersih logam atau reagen kimia. Tapi hati-hati ya, HCl bisa bersifat korosif,
     jangan sampai kena kulit atau mata!
   audioDescription: {fileID: 8300000, guid: c138d473c695a324cae9ecbc0ee45950, type: 3}
+  type: 0
+  strength: 1
+  concentration: 1
+  molarMass: 36.46
+  Ka: 10000000
+  Kb: 0

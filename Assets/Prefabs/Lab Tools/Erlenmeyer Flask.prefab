@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chemicalContainer: {fileID: 5561517261383038398}
+  m_playgroundObjectives: {fileID: 0}
 --- !u!114 &2130333394266358114
 MonoBehaviour:
   m_ObjectHideFlags: 0
