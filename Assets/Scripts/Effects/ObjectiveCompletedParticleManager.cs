@@ -6,19 +6,10 @@ public class ObjectiveCompletedEffect : MonoBehaviour {
 	[SerializeField] private ParticleSystem m_mainParticleSystem;
 	[SerializeField] private float m_floorHeight = 0.0f;
 
-	[Header("Interactor Settings")]
-	[SerializeField] private GrabInteractor m_grabInteractor;
-
 	private Transform m_mainCameraTransform;
 	private PlaygroundObjective m_objective = null;
 	private void Awake() {
-
-		if (m_grabInteractor != null) {
-			m_grabInteractor.WhenStateChanged += HandleOnGrabInteractorStateChanged;
-		}
-
 		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnHandleGetNewObjective;
-
 	}
 
 	private void Start() {
@@ -26,14 +17,6 @@ public class ObjectiveCompletedEffect : MonoBehaviour {
 		OVRCameraRig cameraRig = FindAnyObjectByType<OVRCameraRig>();
 		if (cameraRig != null) {
 			m_mainCameraTransform = cameraRig.centerEyeAnchor;
-		}
-
-	}
-
-	private void HandleOnGrabInteractorStateChanged(InteractorStateChangeArgs args) {
-
-		if (args.NewState == InteractorState.Select) {
-			OnSpawnNewEffect();
 		}
 
 	}
