@@ -5,20 +5,19 @@ using UnityEngine;
 public class PHMeterGun : TriggerBasedTool {
 
 	[SerializeField] private TextMeshProUGUI m_phInfoCard;
-	[SerializeField] private GameObject m_beamDetector;
+	[SerializeField] private BeamDetectorEffect m_beamDetector;
+	[SerializeField] private GameObject m_lightDetectorEffect;
 
 	private IChemicalContainer<ChemicalData> m_currentContainer;
 
-	private void Awake() {
-		m_beamDetector.SetActive(false);
-	}
-
 	protected override void OnHandleTriggerPressed() {
-		m_beamDetector.SetActive(true);
+		m_beamDetector.ActivateBeam();
+		m_lightDetectorEffect.SetActive(true);
 	}
 
 	protected override void OnHandleTriggerReleased() {
-		m_beamDetector.SetActive(false);
+		m_beamDetector.DisableBeam();
+		m_lightDetectorEffect.SetActive(false);
 		m_currentContainer = null;
 	}
 

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8265616219263391208}
   - component: {fileID: 5035183445931737913}
   - component: {fileID: 8731368319415082593}
-  m_Layer: 4
+  m_Layer: 6
   m_Name: InfoCard Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 86.51}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3276110447693594257
 Canvas:
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 3614072793976939261}
   - component: {fileID: 6234444830253213310}
   - component: {fileID: 3136969504301350754}
-  m_Layer: 4
+  m_Layer: 6
   m_Name: Primary Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,8 +246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -43.255}
-  m_SizeDelta: {x: 152, y: 22.51}
+  m_AnchoredPosition: {x: 100, y: 0}
+  m_SizeDelta: {x: 152, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6234444830253213310
 CanvasRenderer:
@@ -358,9 +358,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5276791985621457651}
   - component: {fileID: 8552489027409700152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider Two
-  m_TagString: Untagged
+  m_TagString: Tools
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,9 +444,9 @@ GameObject:
   - component: {fileID: 8617339265203616510}
   - component: {fileID: 670690886836176361}
   - component: {fileID: 2243781866897170920}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PHMeterGun
-  m_TagString: Untagged
+  m_TagString: Tools
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -532,7 +532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2053445523471697147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Object Grip Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,8 +565,9 @@ GameObject:
   - component: {fileID: 3192589206448473308}
   - component: {fileID: 466140538899635623}
   - component: {fileID: 5051986968803604799}
+  - component: {fileID: 5808352174550075501}
   - component: {fileID: 3527186476234159519}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PHMeterGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +634,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_mainGrabbable: {fileID: 1335111083066650572}
   m_phInfoCard: {fileID: 3136969504301350754}
-  m_beamDetector: {fileID: 3945643279339843476}
+  m_beamDetector: {fileID: 6143969211366302914}
+  m_lightDetectorEffect: {fileID: 7899679282954493714}
+--- !u!114 &5808352174550075501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902928925026545464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a794236e72d6ff4458362bdbe5a9fb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioDescription: {fileID: 8300000, guid: 87c0978b996359244a78312fc6f788d6, type: 3}
 --- !u!114 &3527186476234159519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +686,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 5808352174550075501}
+        m_TargetAssemblyTypeName: ToolsExplainable, Assembly-CSharp
+        m_MethodName: OnHandleSelectedEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -678,6 +705,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5808352174550075501}
+        m_TargetAssemblyTypeName: ToolsExplainable, Assembly-CSharp
+        m_MethodName: OnHandleSelectedEvent
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -703,14 +742,15 @@ GameObject:
   - component: {fileID: 6361361969540489921}
   - component: {fileID: 6427815139265606317}
   - component: {fileID: 3554860201433481093}
-  - component: {fileID: 3796327133218969547}
-  m_Layer: 0
+  - component: {fileID: 6143969211366302914}
+  - component: {fileID: 1743942850270063167}
+  m_Layer: 6
   m_Name: Beam Effector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6361361969540489921
 Transform:
   m_ObjectHideFlags: 0
@@ -779,8 +819,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3796327133218969547
-MeshCollider:
+--- !u!114 &6143969211366302914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945643279339843476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecab4f4f8f193064a8df95b81eddd7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_beamDetectorCollider: {fileID: 1743942850270063167}
+  m_deployTime: 0.2
+  m_retractTime: 0.2
+--- !u!65 &1743942850270063167
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -797,10 +852,9 @@ MeshCollider:
   m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4480345288552500532, guid: 4c80d77741b238642bbed076c60ec2ea, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.1577931, y: 0.11264194, z: 0.32086295}
+  m_Center: {x: -0.000000029802322, y: -0.0000000037252903, z: 0.15043145}
 --- !u!1 &4468542471831575396
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3964079550404387329}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: VIsuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,9 +899,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6906031839077071122}
   - component: {fileID: 5282032161303197240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Collider One
-  m_TagString: Untagged
+  m_TagString: Tools
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1139,7 +1193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536177979038970861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1172,7 +1226,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7190283963059459769}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1330,7 +1384,7 @@ GameObject:
   - component: {fileID: 3804373598652457690}
   - component: {fileID: 7542818255844121625}
   - component: {fileID: 1335111083066650572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ISDK_HandGrabInteraction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1373,7 +1427,7 @@ MonoBehaviour:
   _maxGrabPoints: -1
   _rigidbody: {fileID: 466140538899635623}
   _kinematicWhileSelected: 1
-  _throwWhenUnselected: 1
+  _throwWhenUnselected: 0
 --- !u!114 &7542818255844121625
 MonoBehaviour:
   m_ObjectHideFlags: 0

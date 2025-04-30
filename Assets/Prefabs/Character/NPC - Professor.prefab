@@ -975,7 +975,11 @@ MonoBehaviour:
   m_npcAudioSource: {fileID: 2266323360982085}
   monologues:
   - name: Introduction
-    voiceOverClip: {fileID: 8300000, guid: 96647e50ce6b3014a996bf7647eb54b3, type: 3}
+    voiceOverClip: {fileID: 8300000, guid: 2ac15db152a1871459f27bd0cbdec487, type: 3}
+  - name: Acid Base Introduction
+    voiceOverClip: {fileID: 8300000, guid: e1dbc51fb71f7c84f9d03ada1925c9ec, type: 3}
+  - name: Metal Salt Introduction
+    voiceOverClip: {fileID: 8300000, guid: f81728106f59ab54f9393786aa09884c, type: 3}
 --- !u!1 &2607318378767703605
 GameObject:
   m_ObjectHideFlags: 0

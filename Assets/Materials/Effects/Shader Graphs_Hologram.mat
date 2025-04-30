@@ -44,7 +44,7 @@ Material:
     m_Floats:
     - _GlitchStrength: 0
     - _NoiseScale: 500
-    - _NoiseStrength: 0.1
+    - _NoiseStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ScanlineOffset: 0

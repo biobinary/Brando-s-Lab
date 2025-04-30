@@ -15,8 +15,10 @@ public class PlaygroundObjective : ScriptableObject {
 
 	}
 
+	[SerializeField] private string m_objectiveIntroductionMonologueName;
 	[SerializeField] private List<ObjectiveInstruction> m_instructionList;
 
+	public string GetIntroductionMonologueName() => m_objectiveIntroductionMonologueName;
 	public List<ObjectiveInstruction> GetObjectives() => m_instructionList;
 
 	public void ResetAllObjectives() {

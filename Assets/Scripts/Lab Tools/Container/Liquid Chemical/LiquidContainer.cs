@@ -25,6 +25,9 @@ public class LiquidContainer : MonoBehaviour, IPourable<ChemicalData>, IChemical
 	[Header("Effects Settings")]
 	[SerializeField] private ParticleSystem m_pourParticles;
 
+	[Header("Neutralization Checker")]
+	[SerializeField] private NeutralizationChecker m_neutralizationChecker;
+
 	private Dictionary<string, ChemicalPortion<ChemicalData>> m_contents = 
 		new Dictionary<string, ChemicalPortion<ChemicalData>>();
 
@@ -32,6 +35,7 @@ public class LiquidContainer : MonoBehaviour, IPourable<ChemicalData>, IChemical
 
 	private float m_currentPH = 7.0f;
 	private float m_targetPH = 7.0f;
+	private bool m_neutralizationHasBeenCheckedLastFrame = false;
 
 	private PHColorSet m_currentColor = new(Color.white, Color.white, Color.white);
 	private PHColorSet m_targetColor = new(Color.white, Color.white, Color.white);
@@ -54,8 +58,27 @@ public class LiquidContainer : MonoBehaviour, IPourable<ChemicalData>, IChemical
 	private void Update() {
 
 		if (!Mathf.Approximately(m_currentPH, m_targetPH)) {
+		
 			m_currentPH = Mathf.Lerp(
 				m_currentPH, m_targetPH, Time.deltaTime * m_chemicalReactionSpeed);
+
+			if (m_neutralizationChecker != null) { 
+				if( m_neutralizationChecker.confirmationDelayIsOnProgress )
+					m_neutralizationChecker.StopConfirmationDelayTimeout();
+			}
+
+			m_neutralizationHasBeenCheckedLastFrame = false;
+
+		} else {
+
+			if (m_neutralizationChecker != null) {
+				if (!m_neutralizationHasBeenCheckedLastFrame)
+					m_neutralizationChecker.StartNeutralizationConfirmation(
+						m_currentPH, GetChemicalContents());
+			}
+
+			m_neutralizationHasBeenCheckedLastFrame = true;
+
 		}
 
 		m_currentColor = PHColorSet.Lerp(
@@ -95,6 +118,8 @@ public class LiquidContainer : MonoBehaviour, IPourable<ChemicalData>, IChemical
 		m_currentVolume += currentAddedVolume;
 		m_targetPH = PHManager.CalCulatePH(GetChemicalContents(), m_currentVolume);
 		m_targetColor = PHManager.GetPHColor(m_targetPH);
+
+		m_neutralizationHasBeenCheckedLastFrame = false;
 
 	}
 
@@ -142,6 +167,8 @@ public class LiquidContainer : MonoBehaviour, IPourable<ChemicalData>, IChemical
 
 		m_targetPH = PHManager.CalCulatePH(GetChemicalContents(), m_currentVolume);
 		m_targetColor = PHManager.GetPHColor(m_targetPH);
+
+		m_neutralizationHasBeenCheckedLastFrame = false;
 
 		OnHandleRefillCallback(true);
 		return chemicalsRemovePortion;

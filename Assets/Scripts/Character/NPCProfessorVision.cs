@@ -19,9 +19,6 @@ public class NPCProfessorVision : MonoBehaviour {
 
 	private void OnTriggerStay(Collider other) {
 
-		if ( NPCProfessor.Instance.isSpeaking )
-			return;
-
 		if (!TryGetExplainable(other, out var explainable)) return;
 		if (explainable != m_selectedExplainableObject) return;
 

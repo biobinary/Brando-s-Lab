@@ -5403,6 +5403,7 @@ GameObject:
   - component: {fileID: 1370361747366642854}
   - component: {fileID: 1318055271960389864}
   - component: {fileID: 3032726707559790903}
+  - component: {fileID: 5428808326323346342}
   - component: {fileID: 7705720055715199162}
   m_Layer: 6
   m_Name: Beaker
@@ -5480,6 +5481,26 @@ MonoBehaviour:
   m_rendererLimitBounds: {x: 0.15, y: 0.8}
   m_solutionRenderer: {fileID: 8815513287428867856}
   m_pourParticles: {fileID: 8512844077642284911}
+  m_neutralizationChecker: {fileID: 5428808326323346342}
+--- !u!114 &5428808326323346342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8989859310613719815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1833a67235f92c045832702c5a816dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_phTolerance: 0.25
+  m_confirmationCheckTimer: 0.25
+  m_currentObjectives: {fileID: 11400000, guid: e40d7e8bf33243845ad2c7e5d08b46d0, type: 2}
+  m_validPairs:
+  - objectiveMessage: Netralkan HCl dengan NaOH
+    acid: {fileID: 11400000, guid: 99ac1145c137def45a735e2a438804d1, type: 2}
+    baseCompound: {fileID: 11400000, guid: 106f4e0a2d8dc634786128608b3f598e, type: 2}
 --- !u!114 &7705720055715199162
 MonoBehaviour:
   m_ObjectHideFlags: 0

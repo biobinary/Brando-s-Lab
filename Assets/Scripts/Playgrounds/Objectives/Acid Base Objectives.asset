@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdd3721ca5af7349b902323a60a5489, type: 3}
   m_Name: Acid Base Objectives
   m_EditorClassIdentifier: 
+  m_objectiveIntroductionMonologueName: Acid Base Introduction
   m_instructionList:
   - instructions: Identifikasi Senyawa HCl
     objectiveAudioHint: {fileID: 0}

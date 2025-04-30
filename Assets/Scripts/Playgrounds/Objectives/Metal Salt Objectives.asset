@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdd3721ca5af7349b902323a60a5489, type: 3}
   m_Name: Metal Salt Objectives
   m_EditorClassIdentifier: 
+  m_objectiveIntroductionMonologueName: Metal Salt Introduction
   m_instructionList:
   - instructions: Buat Api yang Berwarna Merah
+    objectiveAudioHint: {fileID: 0}
     isComplete: 0
   - instructions: Buat Api yang Berwarna Kuning
+    objectiveAudioHint: {fileID: 0}
     isComplete: 0
   - instructions: Buat Api yang Berwarna Hijau
+    objectiveAudioHint: {fileID: 0}
     isComplete: 0
   - instructions: Buat Api yang Berwarna Ungu
+    objectiveAudioHint: {fileID: 0}
     isComplete: 0

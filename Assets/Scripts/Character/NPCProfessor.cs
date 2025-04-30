@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,6 +43,7 @@ public class NPCProfessor : MonoBehaviour {
 
 		} else if(Instance != null && Instance != this) {
 			Destroy(gameObject);
+			return;
 
 		}
 
@@ -50,10 +52,32 @@ public class NPCProfessor : MonoBehaviour {
 				m_monologuesDict.Add(monologue.name, monologue);
 		}
 
+		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnHandleLoadNewEnvironment;
+
+	}
+	
+	private void OnHandleLoadNewEnvironment(PlaygroundEnvironment env) {
+
+		if (env == null)
+			return;
+
+		PlaygroundObjective objective = env.GetObjective();
+		if (objective == null)
+			return;
+
+		PlayMonologue(objective.GetIntroductionMonologueName(), true);
+
+	}
+
+	private IEnumerator IntroductionDelay() {
+		yield return new WaitForSeconds(5.0f);
+		PlayMonologue("Introduction");
+
 	}
 
 	private void Start() {
-		// PlayMonologue("Introduction");
+		StartCoroutine(IntroductionDelay());
+
 	}
 
 	public void PlayMonologue( string monologueName, bool isOnlyPlayOnce = false ) {
