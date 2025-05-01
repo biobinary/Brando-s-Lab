@@ -5482,6 +5482,7 @@ MonoBehaviour:
   m_solutionRenderer: {fileID: 8815513287428867856}
   m_pourParticles: {fileID: 8512844077642284911}
   m_neutralizationChecker: {fileID: 5428808326323346342}
+  m_canDebug: 0
 --- !u!114 &5428808326323346342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5501,6 +5502,15 @@ MonoBehaviour:
   - objectiveMessage: Netralkan HCl dengan NaOH
     acid: {fileID: 11400000, guid: 99ac1145c137def45a735e2a438804d1, type: 2}
     baseCompound: {fileID: 11400000, guid: 106f4e0a2d8dc634786128608b3f598e, type: 2}
+  - objectiveMessage: Netralkan CH3COOH dengan NH3
+    acid: {fileID: 11400000, guid: 862220ea9b0dd5e4db4a2dd4e649189a, type: 2}
+    baseCompound: {fileID: 11400000, guid: 8c8caddcafeb6f54d9c9702b6e90414b, type: 2}
+  - objectiveMessage: Netralkan HNO3 dengan NH4OH
+    acid: {fileID: 11400000, guid: e0a74c05058c43443a975a292935c552, type: 2}
+    baseCompound: {fileID: 11400000, guid: caa9c26b94a53bd4783cc99d86fcdc9f, type: 2}
+  - objectiveMessage: Netralkan HCOOH dengan KOH
+    acid: {fileID: 11400000, guid: 9bf94bd2d09ac214b97b73b6c0da96dd, type: 2}
+    baseCompound: {fileID: 11400000, guid: 6ca10ca2caf57c947bda6b7197d3964b, type: 2}
 --- !u!114 &7705720055715199162
 MonoBehaviour:
   m_ObjectHideFlags: 0

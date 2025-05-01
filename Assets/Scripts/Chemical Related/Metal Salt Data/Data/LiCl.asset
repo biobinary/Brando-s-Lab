@@ -16,5 +16,5 @@ MonoBehaviour:
   formula: LiCl
   description: Ion lithium menghasilkan warna merah terang saat dibakar. Warna ini
     sering dipakai dalam kembang api.
-  audioDescription: {fileID: 0}
+  audioDescription: {fileID: 8300000, guid: 4455b2e84151bf644ad392a81412aa12, type: 3}
   flameColor: {r: 1, g: 0, b: 0.4, a: 1}

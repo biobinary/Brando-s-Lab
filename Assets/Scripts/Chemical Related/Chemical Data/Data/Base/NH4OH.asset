@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df47eaa9e45768b4b9e52a6e586a5f74, type: 3}
+  m_Name: NH4OH
+  m_EditorClassIdentifier: 
+  chemicalName: Amonium Hidroksida
+  formula: NH4OH
+  description: Basa lemah dengan bau menyengat yang digunakan dalam pembersih rumah
+    tangga, industri tekstil, dan proses laboratorium.
+  audioDescription: {fileID: 0}
+  type: 1
+  strength: 0
+  concentration: 1
+  molarMass: 35.05
+  Ka: 0
+  Kb: 0.000018

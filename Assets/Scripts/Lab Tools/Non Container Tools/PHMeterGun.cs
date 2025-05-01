@@ -74,7 +74,7 @@ public class PHMeterGun : TriggerBasedTool {
 		} else {
 
 			if (m_phInfoCard != null)
-				m_phInfoCard.text = "No object detected";
+				m_phInfoCard.text = "Tidak ada objek";
 
 		}
 

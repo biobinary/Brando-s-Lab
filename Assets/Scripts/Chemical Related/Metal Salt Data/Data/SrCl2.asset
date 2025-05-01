@@ -16,5 +16,5 @@ MonoBehaviour:
   formula: SrCl2
   description: Nyala merah menyala khas strontium. Penting dalam sistem sinyal bahaya
     maritim.
-  audioDescription: {fileID: 0}
+  audioDescription: {fileID: 8300000, guid: c8be3b81fe2c3a848984e83f4b77d2d5, type: 3}
   flameColor: {r: 1, g: 0, b: 0, a: 1}

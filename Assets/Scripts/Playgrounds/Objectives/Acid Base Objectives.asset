@@ -22,7 +22,31 @@ MonoBehaviour:
     isComplete: 0
   - instructions: Identifikasi Senyawa NaOH
     objectiveAudioHint: {fileID: 0}
-    isComplete: 0
+    isComplete: 1
   - instructions: Identifikasi Senyawa CH3COOH
     objectiveAudioHint: {fileID: 0}
-    isComplete: 1
+    isComplete: 0
+  - instructions: Identifikasi Senyawa HCOOH
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
+  - instructions: Identifikasi Senyawa HNO3
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
+  - instructions: Identifikasi Senyawa KOH
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
+  - instructions: Identifikasi Senyawa NH4OH
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
+  - instructions: Netralkan HCl dengan NaOH
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
+  - instructions: Netralkan CH3COOH dengan NH3
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
+  - instructions: Netralkan HNO3 dengan NH4OH
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
+  - instructions: Netralkan HCOOH dengan KOH
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
