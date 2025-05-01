@@ -70,14 +70,18 @@ public class NPCProfessor : MonoBehaviour {
 	}
 
 	private IEnumerator IntroductionDelay() {
+		
 		yield return new WaitForSeconds(5.0f);
-		PlayMonologue("Introduction");
+
+		if (m_npcAudioSource != null) {
+			if (!m_npcAudioSource.isPlaying)
+				PlayMonologue("Introduction");
+		}
 
 	}
 
 	private void Start() {
 		StartCoroutine(IntroductionDelay());
-
 	}
 
 	public void PlayMonologue( string monologueName, bool isOnlyPlayOnce = false ) {

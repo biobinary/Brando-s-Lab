@@ -15,38 +15,38 @@ MonoBehaviour:
   m_objectiveIntroductionMonologueName: Acid Base Introduction
   m_instructionList:
   - instructions: Identifikasi Senyawa HCl
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
     isComplete: 0
   - instructions: Identifikasi Senyawa NH3
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
     isComplete: 0
   - instructions: Identifikasi Senyawa NaOH
-    objectiveAudioHint: {fileID: 0}
-    isComplete: 1
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
+    isComplete: 0
   - instructions: Identifikasi Senyawa CH3COOH
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
     isComplete: 0
   - instructions: Identifikasi Senyawa HCOOH
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
     isComplete: 0
   - instructions: Identifikasi Senyawa HNO3
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
     isComplete: 0
   - instructions: Identifikasi Senyawa KOH
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
     isComplete: 0
   - instructions: Identifikasi Senyawa NH4OH
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: fc2d0b4f65aa23e40902ff4a47ff33aa, type: 3}
     isComplete: 0
   - instructions: Netralkan HCl dengan NaOH
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: bb747ac62b65730478c2c925551f9ee2, type: 3}
     isComplete: 0
   - instructions: Netralkan CH3COOH dengan NH3
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: bb747ac62b65730478c2c925551f9ee2, type: 3}
     isComplete: 0
   - instructions: Netralkan HNO3 dengan NH4OH
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: bb747ac62b65730478c2c925551f9ee2, type: 3}
     isComplete: 0
   - instructions: Netralkan HCOOH dengan KOH
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: bb747ac62b65730478c2c925551f9ee2, type: 3}
     isComplete: 0
