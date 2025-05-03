@@ -26,6 +26,9 @@ public class GameMenu : MonoBehaviour {
 		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
 		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
 
+		m_environmentInformationContent.SetActive(true);
+		m_settingsContent.SetActive(false);
+
 	}
 
 	private void Start() {
@@ -33,9 +36,8 @@ public class GameMenu : MonoBehaviour {
 	}
 
 	private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
-		
+
 		m_canvasRoot.SetActive(true);
-		m_environmentInformationContent.SetActive(true);
 
 		if( env != null )
 			m_environtmentInformationTitle.text = env.gameObject.name;

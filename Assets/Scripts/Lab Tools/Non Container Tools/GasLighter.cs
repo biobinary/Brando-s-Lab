@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using UnityEngine;
 
 public class GasLighter : TriggerBasedTool {
@@ -12,8 +13,12 @@ public class GasLighter : TriggerBasedTool {
 	[SerializeField] private float m_triggerPressedPosition = 0.0075f;
 	[SerializeField] private GameObject m_triggerGameObject;
 
+	[Header("SFX")]
+	[SerializeField] private AudioSource m_fireSoundEffect;
+
 	ParticleSystem.ShapeModule m_shapeModule;
 
+	private bool m_isCastFire = false;
 	private IBurnable m_currentBurnable= null;
 
 	private void Awake() {
@@ -29,7 +34,18 @@ public class GasLighter : TriggerBasedTool {
 		);
 
 		m_fireEffect.Play();
-		CastFire();
+		m_fireSoundEffect.Play();
+
+		m_isCastFire = true;
+
+	}
+
+	protected override void Update() {
+		
+		base.Update();
+		
+		if( m_isCastFire )
+			CastFire();
 
 	}
 
@@ -47,6 +63,9 @@ public class GasLighter : TriggerBasedTool {
 		);
 
 		m_fireEffect.Stop();
+		m_fireSoundEffect.Stop();
+
+		m_isCastFire = false;
 
 	}
 

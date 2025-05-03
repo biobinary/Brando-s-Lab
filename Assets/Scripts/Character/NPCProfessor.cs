@@ -129,12 +129,12 @@ public class NPCProfessor : MonoBehaviour {
 	private IEnumerator StartMonologueProgress() {
 
 		m_npcAudioSource.Play();
-		MusicManager.Instance.FadeVolume(0.15f, 0.5f);
+		MusicManager.Instance.MuffleMusic(0.15f, 0.5f);
 
 		while (m_npcAudioSource.isPlaying)
 			yield return null;
 
-		MusicManager.Instance.FadeVolume(0.8f, 1.0f);
+		MusicManager.Instance.CancelMuffle(1.0f);
 		m_monologueProgress = null;
 
 	}

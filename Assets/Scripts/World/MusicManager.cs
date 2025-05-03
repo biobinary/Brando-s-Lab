@@ -28,7 +28,11 @@ public class MusicManager : MonoBehaviour {
 
 	private string m_currentTrackName = "";
 	private bool m_isMuted = false;
+	
 	private float m_savedVolume = 1.0f;
+	private float m_muffleVolume = 0.0f;
+
+	private bool m_isOnMuffle = false;
 
 	private Coroutine m_volumeFadeCoroutine = null;
 
@@ -100,23 +104,73 @@ public class MusicManager : MonoBehaviour {
 		volume = Mathf.Clamp01(volume);
 		m_savedVolume = volume;
 
-		if (!m_isMuted) {
-			m_audioSource.volume = m_savedVolume;
+		if ( !m_isMuted && m_volumeFadeCoroutine == null) {
+			
+			if( m_isOnMuffle ) {
+				
+				if (m_savedVolume < m_muffleVolume)
+					m_audioSource.volume = m_savedVolume;
+				
+				else
+					m_audioSource.volume = m_muffleVolume;
+
+			} else {
+				m_audioSource.volume = m_savedVolume;
+			
+			}
 		}
 
 	}
 
-	public void FadeVolume(float targetVolume, float fadeDuration) {
+	public void MuffleMusic(float targetVolume, float fadeDuration) {
 
 		targetVolume = Mathf.Clamp01(targetVolume);
-		m_savedVolume = targetVolume;
+		if (targetVolume > m_savedVolume)
+			return;
+
+		m_isOnMuffle = true;
+		m_muffleVolume = targetVolume;
+
+		if (fadeDuration <= 0 || m_isMuted) {
+			
+			if (!m_isMuted) {
+				m_audioSource.volume = targetVolume;
+			}
+			
+			return;
+
+		}
 
 		if (m_volumeFadeCoroutine != null) {
 			StopCoroutine(m_volumeFadeCoroutine);
 		}
 
 		m_volumeFadeCoroutine = StartCoroutine(FadeVolumeCoroutine(targetVolume, fadeDuration));
-	
+
+	}
+
+	public void CancelMuffle(float fadeDuration) {
+
+		m_isOnMuffle = false;
+
+		if (fadeDuration <= 0 || m_isMuted) {
+			
+			if (!m_isMuted) {
+				m_audioSource.volume = m_savedVolume;
+			
+			}
+			
+			return;
+
+		}
+
+
+		if (m_volumeFadeCoroutine != null) {
+			StopCoroutine(m_volumeFadeCoroutine);
+		}
+
+		m_volumeFadeCoroutine = StartCoroutine(FadeVolumeCoroutine(m_savedVolume, fadeDuration));
+
 	}
 
 	private IEnumerator FadeVolumeCoroutine(float targetVolume, float duration) {
@@ -151,11 +205,35 @@ public class MusicManager : MonoBehaviour {
 		
 		m_isMuted = mute;
 
-		if (mute)
-			m_audioSource.volume = 0f;
-		else
-			m_audioSource.volume = m_savedVolume;
+		if (mute) {
 
+			if (m_volumeFadeCoroutine != null) {
+				StopCoroutine(m_volumeFadeCoroutine);
+				m_volumeFadeCoroutine = null;
+			}
+
+			m_audioSource.volume = 0f;
+
+		} else {
+			if (m_isOnMuffle)
+				m_audioSource.volume = m_muffleVolume;
+			else
+				m_audioSource.volume = m_savedVolume;
+		}
+
+	}
+
+	public MusicTrack GetCurrentMusicTrackInfo() {
+
+		if (m_trackDictionary.TryGetValue(m_currentTrackName, out MusicTrack track))
+			return track;
+
+		return null;
+
+	}
+
+	public float GetCurrentVolume() {
+		return m_savedVolume;
 	}
 
 }

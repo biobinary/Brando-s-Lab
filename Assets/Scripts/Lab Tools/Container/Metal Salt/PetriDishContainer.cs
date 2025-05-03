@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using YourNamespace;
+using Oculus.Interaction;
 
 public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, IBurnable {
 
@@ -18,6 +19,9 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 	[Header("Fire Visual Settings")]
 	[SerializeField] private GameObject m_fireEffect;
 	[SerializeField] private float m_maxFireTimeout = 8.0f;
+
+	[Header("Sound Effect Settings")]
+	[SerializeField] private AudioTrigger m_fireTriggerSFX;
 
 	[Header("Objectives")]
 	public PlaygroundObjective m_playgroundObjective;
@@ -165,6 +169,8 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 		if (currentSalt != null) {
 
 			m_isOnFire = true;
+
+			m_fireTriggerSFX.PlayAudio();
 
 			m_fireEffect.SetActive(true);
 			m_interactableGameObject.SetActive(false);
