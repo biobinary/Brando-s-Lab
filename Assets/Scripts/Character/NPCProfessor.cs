@@ -22,6 +22,8 @@ public class NPCProfessor : MonoBehaviour {
 	[SerializeField] private List<NPCMonologue> monologues = new List<NPCMonologue>();
 	private Dictionary<string, NPCMonologue> m_monologuesDict = new Dictionary<string, NPCMonologue>();
 
+	private Coroutine m_monologueProgress = null;
+
 	[HideInInspector]
 	public bool isSpeaking {
 
@@ -89,12 +91,15 @@ public class NPCProfessor : MonoBehaviour {
 		if (m_monologuesDict.TryGetValue(monologueName, out NPCMonologue monologue)) {
 
 			if (m_npcAudioSource != null) {
-				
-				if( m_npcAudioSource.isPlaying)
+
+				if (m_monologueProgress != null)
+					StopCoroutine(m_monologueProgress);
+
+				if ( m_npcAudioSource.isPlaying)
 					m_npcAudioSource.Stop();
 
 				m_npcAudioSource.clip = monologue.voiceOverClip;
-				m_npcAudioSource.Play();
+				m_monologueProgress = StartCoroutine(StartMonologueProgress());
 
 			}
 			
@@ -110,11 +115,27 @@ public class NPCProfessor : MonoBehaviour {
 		if (voiceOverClip == null) return;
 		if (m_npcAudioSource == null) return;
 
+		if (m_monologueProgress != null)
+			StopCoroutine(m_monologueProgress);
+
 		if (m_npcAudioSource.isPlaying)
 			m_npcAudioSource.Stop();
 
 		m_npcAudioSource.clip = voiceOverClip;
+		m_monologueProgress = StartCoroutine(StartMonologueProgress());
+
+	}
+
+	private IEnumerator StartMonologueProgress() {
+
 		m_npcAudioSource.Play();
+		MusicManager.Instance.FadeVolume(0.15f, 0.5f);
+
+		while (m_npcAudioSource.isPlaying)
+			yield return null;
+
+		MusicManager.Instance.FadeVolume(0.8f, 1.0f);
+		m_monologueProgress = null;
 
 	}
 

@@ -15,14 +15,17 @@ MonoBehaviour:
   m_objectiveIntroductionMonologueName: Metal Salt Introduction
   m_instructionList:
   - instructions: Buat Api yang Berwarna Merah
-    objectiveAudioHint: {fileID: 0}
-    isComplete: 0
-  - instructions: Buat Api yang Berwarna Kuning
-    objectiveAudioHint: {fileID: 0}
-    isComplete: 0
-  - instructions: Buat Api yang Berwarna Hijau
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: dc79747a635af014fbad43ae8927ea55, type: 3}
     isComplete: 0
   - instructions: Buat Api yang Berwarna Ungu
-    objectiveAudioHint: {fileID: 0}
+    objectiveAudioHint: {fileID: 8300000, guid: a54d73c35521bd44eace8eb0ed017bf1, type: 3}
+    isComplete: 0
+  - instructions: Buat Api yang Berwarna Kuning
+    objectiveAudioHint: {fileID: 8300000, guid: ee45ea090f2ec754abfc35f7ab145f0a, type: 3}
+    isComplete: 0
+  - instructions: Buat Api yang Berwarna Hijau
+    objectiveAudioHint: {fileID: 8300000, guid: 4357733aefe690d4291b7db6d4b6f8ca, type: 3}
+    isComplete: 0
+  - instructions: Buat Api yang Berwarna Biru
+    objectiveAudioHint: {fileID: 8300000, guid: 3c3c514450377334c8fd79cdcace1ce8, type: 3}
     isComplete: 0
