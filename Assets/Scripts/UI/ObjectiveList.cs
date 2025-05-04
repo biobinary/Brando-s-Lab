@@ -3,10 +3,17 @@ using UnityEngine;
 public class ObjectiveList : MonoBehaviour {
 
 	[SerializeField] private GameObject m_objectiveUIComponent;
+	[SerializeField] private Transform m_desiredSpawnTransform;
+
+	private Transform m_spawnTransform;
 
 	private void Awake() {
+		
 		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
 		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
+
+		m_spawnTransform = m_desiredSpawnTransform != null ? m_desiredSpawnTransform : transform;
+
 	}
 
 	private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
@@ -23,7 +30,7 @@ public class ObjectiveList : MonoBehaviour {
 		foreach ( PlaygroundObjective.ObjectiveInstruction instruction in
 				  currentObjective.GetObjectives()) {
 
-			GameObject componentGameObject = Instantiate(m_objectiveUIComponent, transform);
+			GameObject componentGameObject = Instantiate(m_objectiveUIComponent, m_spawnTransform);
 			ObjectiveUIComponent uiComponent = componentGameObject.GetComponent<ObjectiveUIComponent>();
 			uiComponent.SetNewInstruction(instruction);
 
@@ -33,7 +40,7 @@ public class ObjectiveList : MonoBehaviour {
 
 	private void OnEnvironmentDestroyed() {
 
-		foreach (Transform child in transform) {
+		foreach (Transform child in m_spawnTransform) {
 			Destroy(child.gameObject);
 		}
 

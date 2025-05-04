@@ -16,7 +16,7 @@ MonoBehaviour:
   formula: KOH
   description: Basa kuat yang digunakan dalam pembuatan sabun dan elektrolit dalam
     baterai.
-  audioDescription: {fileID: 0}
+  audioDescription: {fileID: 8300000, guid: 6d6d9ec6e294f9644a6434dc5ffa32b2, type: 3}
   type: 1
   strength: 1
   concentration: 1

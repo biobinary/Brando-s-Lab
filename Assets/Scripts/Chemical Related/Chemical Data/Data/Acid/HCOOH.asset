@@ -16,7 +16,7 @@ MonoBehaviour:
   formula: HCOOH
   description: Asam lemah alami yang ditemukan dalam racun semut dan digunakan dalam
     industri tekstil.
-  audioDescription: {fileID: 0}
+  audioDescription: {fileID: 8300000, guid: b33d6600c133df141ac6d53f076e2bcb, type: 3}
   type: 0
   strength: 0
   concentration: 1

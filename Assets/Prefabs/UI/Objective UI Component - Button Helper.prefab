@@ -911,8 +911,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 8
     m_Right: 8
-    m_Top: 8
-    m_Bottom: 8
+    m_Top: 4
+    m_Bottom: 4
   m_ChildAlignment: 0
   m_Spacing: 12
   m_ChildForceExpandWidth: 1
@@ -934,7 +934,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45192527aec7f84b9495a5c67c466cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectiveListManager: {fileID: 0}
+  instruction:
+    instructions: 
+    objectiveAudioHint: {fileID: 0}
+    isComplete: 0
   m_instructionLabel: {fileID: 8449819315534104607}
   m_checkBox: {fileID: 3401558831491280043}
   m_toggleHelper: {fileID: 7324869942163230355}

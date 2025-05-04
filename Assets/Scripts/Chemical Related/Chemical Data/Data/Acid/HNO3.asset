@@ -15,7 +15,7 @@ MonoBehaviour:
   chemicalName: Asam Nitrat
   formula: HNO3
   description: Asam kuat monoprotik yang digunakan dalam industri peledak dan pupuk.
-  audioDescription: {fileID: 0}
+  audioDescription: {fileID: 8300000, guid: befd6ce3b0599b043a1cf6b379005f7f, type: 3}
   type: 0
   strength: 1
   concentration: 1

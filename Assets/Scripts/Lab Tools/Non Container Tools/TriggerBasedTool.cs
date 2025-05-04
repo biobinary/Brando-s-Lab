@@ -6,7 +6,7 @@ public abstract class TriggerBasedTool : MonoBehaviour {
 
 	[SerializeField] protected GrabInteractable m_mainGrabbable;
 
-	protected ControllerRef m_currentControllerRef = null;
+	private bool m_isSelectedByInteractor = false;
 	private bool m_wasTriggerPressedLastFrame = false;
 
 	private void OnEnable() {
@@ -15,30 +15,37 @@ public abstract class TriggerBasedTool : MonoBehaviour {
 	}
 
 	private void OnDisable() {
-		m_currentControllerRef = null;
+		m_isSelectedByInteractor = false;
 		m_mainGrabbable.WhenSelectingInteractorViewAdded -= OnHandleSelectedByInteractor;
 		m_mainGrabbable.WhenSelectingInteractorViewRemoved -= OnHandleUnselectedByInteractor;
 
 	}
 
 	private void OnHandleSelectedByInteractor(IInteractorView interactor) {
-		
-		object interactorData = interactor.Data;
-		if (interactorData is GrabInteractor grabInteractor)
-			m_currentControllerRef = grabInteractor.GetComponent<ControllerRef>();
-		
-	
+		m_isSelectedByInteractor = true;
 	}
 
 	private void OnHandleUnselectedByInteractor(IInteractorView interactor) {
-		m_currentControllerRef = null;
+		m_isSelectedByInteractor = false;
 	}
 
 	protected virtual void Update() {
 
-		if (m_currentControllerRef != null) {
+		if (m_isSelectedByInteractor) {
 
-			bool isPressed = m_currentControllerRef.ControllerInput.TriggerButton;
+			bool isPressed = false;
+
+			foreach (IInteractorView interactorView in m_mainGrabbable.SelectingInteractorViews) {
+				
+				object interactorData = interactorView.Data;
+				
+				if (interactorData is GrabInteractor grabInteractor) {
+					ControllerRef currentController = grabInteractor.GetComponent<ControllerRef>();
+					isPressed = currentController.ControllerInput.TriggerButton;
+					break;
+				}
+
+			}
 			
 			if (isPressed && !m_wasTriggerPressedLastFrame) {
 				OnHandleTriggerPressed();

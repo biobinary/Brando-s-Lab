@@ -16,7 +16,7 @@ MonoBehaviour:
   formula: NH4OH
   description: Basa lemah dengan bau menyengat yang digunakan dalam pembersih rumah
     tangga, industri tekstil, dan proses laboratorium.
-  audioDescription: {fileID: 0}
+  audioDescription: {fileID: 8300000, guid: 5271ea7e9e9549e44892891898baa041, type: 3}
   type: 1
   strength: 0
   concentration: 1
