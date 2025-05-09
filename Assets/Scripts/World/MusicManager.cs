@@ -215,10 +215,12 @@ public class MusicManager : MonoBehaviour {
 			m_audioSource.volume = 0f;
 
 		} else {
-			if (m_isOnMuffle)
+
+			if( m_isOnMuffle && m_savedVolume > m_muffleVolume)
 				m_audioSource.volume = m_muffleVolume;
 			else
 				m_audioSource.volume = m_savedVolume;
+
 		}
 
 	}

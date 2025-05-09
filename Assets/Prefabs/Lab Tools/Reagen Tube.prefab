@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_containerMonoBehaviour: {fileID: 1235712879266090285}
   m_pourRadius: 0.02
-  m_pourRate: 10
+  m_pourRate: 5
   m_pourParticles: {fileID: 7056672313725638980}
   m_pourLayerMask:
     serializedVersion: 2
@@ -761,6 +761,7 @@ MonoBehaviour:
   m_rendererLimitBounds: {x: 0.06, y: 1}
   m_solutionRenderer: {fileID: 8137409227205992770}
   m_pourParticles: {fileID: 7056672313725638980}
+  m_neutralizationChecker: {fileID: 0}
 --- !u!114 &6317822681564357040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,8 +906,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6870283439922419838}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.4649, y: -0.11809999, z: 1.7820001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
