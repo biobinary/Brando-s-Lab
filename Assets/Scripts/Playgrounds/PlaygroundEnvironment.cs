@@ -7,8 +7,10 @@ public class PlaygroundEnvironment : MonoBehaviour {
 	[SerializeField] private float m_spawnRate = 0.2f;
 	[SerializeField] private GameObject m_spawnEffect;
 	[SerializeField] private PlaygroundObjective m_objective;
+	[SerializeField] private PlaygroundTutorials m_tutorial;
 
 	public PlaygroundObjective GetObjective() => m_objective;
+	public PlaygroundTutorials GetPlaygroundTutorials() => m_tutorial;
 
 	private struct EnvironmentObjectTransformData {
 		public Vector3 initialPosition;

@@ -52,6 +52,8 @@ public abstract class ContainerInfoCard<T> : MonoBehaviour where T : ChemicalBas
 		if (Pointable != null)
 			Pointable.WhenPointerEventRaised -= OnHandlePointerEventRaised;
 
+		m_canvasGameObject.SetActive(false);
+
 	}
 
 	private void OnHandlePointerEventRaised(PointerEvent pointerEvent) {

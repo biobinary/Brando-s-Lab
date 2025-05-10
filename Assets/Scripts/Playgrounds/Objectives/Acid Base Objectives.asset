@@ -50,3 +50,4 @@ MonoBehaviour:
   - instructions: Netralkan HCOOH dengan KOH
     objectiveAudioHint: {fileID: 8300000, guid: bb747ac62b65730478c2c925551f9ee2, type: 3}
     isComplete: 0
+  m_playgroundTutorialInfos: {fileID: 11400000, guid: 50161fd5b91df3043836232e93cc2994, type: 2}

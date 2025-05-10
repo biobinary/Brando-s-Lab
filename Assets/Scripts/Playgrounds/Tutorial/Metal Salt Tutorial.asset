@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92923618df652e46902a88848d573f4, type: 3}
+  m_Name: Metal Salt Tutorial
+  m_EditorClassIdentifier: 
+  m_tutorialList:
+  - tutorialName: Cara Minta Bantuan ke Professor Brando
+    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}
+  - tutorialName: Cara Lihat Informasi Garam
+    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}
+  - tutorialName: Cara Menuangkan Garam Ke Petri DIsh
+    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}
+  - tutorialName: Cara Membakar Garam Logam
+    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}

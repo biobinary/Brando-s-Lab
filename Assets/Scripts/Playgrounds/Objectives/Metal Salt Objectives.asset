@@ -29,3 +29,4 @@ MonoBehaviour:
   - instructions: Buat Api yang Berwarna Biru
     objectiveAudioHint: {fileID: 8300000, guid: 3c3c514450377334c8fd79cdcace1ce8, type: 3}
     isComplete: 0
+  m_playgroundTutorialInfos: {fileID: 11400000, guid: 2d4a760bbff1b894489d871c62006aa5, type: 2}

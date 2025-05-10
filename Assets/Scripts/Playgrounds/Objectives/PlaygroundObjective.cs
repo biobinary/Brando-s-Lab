@@ -19,7 +19,7 @@ public class PlaygroundObjective : ScriptableObject {
 	[SerializeField] private List<ObjectiveInstruction> m_instructionList;
 
 	public string GetIntroductionMonologueName() => m_objectiveIntroductionMonologueName;
-	public List<ObjectiveInstruction> GetObjectives() => m_instructionList;
+	public IReadOnlyList<ObjectiveInstruction> GetObjectives() => m_instructionList;
 
 	public void ResetAllObjectives() {
 
