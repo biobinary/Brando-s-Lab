@@ -19,8 +19,13 @@ public class TutorialInfoMenu : MonoBehaviour {
 		};
 
 		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += () => {
+
+			m_tutorialListGameobject.SetActive(true);
+			m_videoPlayer.gameObject.SetActive(false);
+
 			m_currentEnv = null;
 			m_isTutorialInitialized = false;
+
 		};
 	
 	}
@@ -72,7 +77,6 @@ public class TutorialInfoMenu : MonoBehaviour {
 
 		if (button.tutorial?.tutorialVideo == null) return;
 
-		Debug.Log("Called Here!");
 		m_videoPlayer.SetupNewVideo(button.tutorial.tutorialVideo);
 
 		m_tutorialListGameobject.SetActive(false);
