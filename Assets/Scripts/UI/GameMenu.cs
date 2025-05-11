@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +5,8 @@ using UnityEngine.UI;
 public class GameMenu : MonoBehaviour {
 
 	[SerializeField] private GameObject m_canvasRoot;
-	[SerializeField] private GameObject m_defaultMenu;
-	[SerializeField] private List<GameObject> m_menus = new();
+	[SerializeField] private GameObject m_tutorialMenu;
+	[SerializeField] private GameObject m_objectiveMenu;
  
 	[Header("Environtment Information")]
 	[SerializeField] private GameObject m_environmentInformationContent;
@@ -28,19 +27,15 @@ public class GameMenu : MonoBehaviour {
 		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
 		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
 
-		foreach (GameObject menu in m_menus) {
-			menu.SetActive(true);
-		}
+		m_tutorialMenu.SetActive(true);
+		m_objectiveMenu.SetActive(true);
 
 	}
 
 	private void Start() {
 
-		foreach (GameObject menu in m_menus) {
-			menu.SetActive(false);
-		}
-
-		m_defaultMenu.SetActive(true);
+		m_tutorialMenu.SetActive(false);
+		m_objectiveMenu.SetActive(true);
 		m_canvasRoot.SetActive(false);
 
 	}
