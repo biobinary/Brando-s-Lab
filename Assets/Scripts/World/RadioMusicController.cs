@@ -9,6 +9,12 @@ public class RadioMusicController : MonoBehaviour {
 	[SerializeField] private Transform m_volumeKnob;
 	[SerializeField] private GrabInteractable m_grabInteractable;
 
+	[Header("Visual Settings")]
+	[SerializeField] private ParticleSystem m_musicalSpeakerLeft;
+	[SerializeField] private ParticleSystem m_musicalSpeakerRight;
+
+	private bool m_isEffectPlaying = false;
+
 	private void Update() {
 
 		if (MusicManager.Instance == null || m_grabInteractable == null || m_volumeKnob == null) 
@@ -20,6 +26,18 @@ public class RadioMusicController : MonoBehaviour {
 			SetNewVolumeLevel();
 		else
 			SetupVolumeKnob();
+
+		if( MusicManager.Instance.IsPlaying() && !m_isEffectPlaying) {
+			m_isEffectPlaying = true;
+			m_musicalSpeakerLeft.Play();
+			m_musicalSpeakerRight.Play();
+
+		} else if( !MusicManager.Instance.IsPlaying() && m_isEffectPlaying ) {
+			m_isEffectPlaying = false;
+			m_musicalSpeakerLeft.Stop();
+			m_musicalSpeakerRight.Stop();
+
+		}
 
 	}
 
@@ -49,8 +67,9 @@ public class RadioMusicController : MonoBehaviour {
 			GetNormalizedAngle(m_volumeKnob.localEulerAngles.x)
 		);
 
-		if (Mathf.Approximately(t, 0.0f)) {
+		if (t < 0.01f) {
 			MusicManager.Instance.MuteMusic(true);
+			MusicManager.Instance.SetVolume(0.0f);
 		
 		} else {
 			MusicManager.Instance.MuteMusic(false);

@@ -225,17 +225,10 @@ public class MusicManager : MonoBehaviour {
 
 	}
 
-	public MusicTrack GetCurrentMusicTrackInfo() {
-
-		if (m_trackDictionary.TryGetValue(m_currentTrackName, out MusicTrack track))
-			return track;
-
-		return null;
-
-	}
-
 	public float GetCurrentVolume() {
 		return m_savedVolume;
 	}
+
+	public bool IsPlaying() => m_audioSource.isPlaying && !m_isMuted;
 
 }
