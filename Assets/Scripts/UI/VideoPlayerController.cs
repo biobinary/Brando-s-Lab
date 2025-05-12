@@ -1,4 +1,5 @@
 using TMPro;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -20,9 +21,17 @@ public class VideoPlayerController : MonoBehaviour {
 	[SerializeField] private Image m_playPauseButtonImage;
 	[SerializeField] private Sprite m_playIcon;
 	[SerializeField] private Sprite m_pauseIcon;
+	[SerializeField] private CanvasGroup m_playerControl;
 
 	private const float skipDuration = 5.0f;
 	private VideoClip m_currentVideoClip;
+
+	private Coroutine m_controlHideFadeCoroutine = null;
+
+	private float m_controlHideMaxDuration = 3.0f;
+	private float m_controlHideTimeout = 0.0f;
+
+	private bool m_isControlHidden = false;
 
 	private void Awake() {
 
@@ -36,11 +45,8 @@ public class VideoPlayerController : MonoBehaviour {
 			m_skipBackwardButton.onValueChanged.AddListener((value) => SkipTime(-skipDuration));
 
 		if (m_progressSlider != null) {
-
-			m_progressSlider.onValueChanged.AddListener(OnSliderValueChanged);
-			m_progressSlider.interactable = true;
+			m_progressSlider.interactable = false;
 			m_progressSlider.minValue = 0f;
-
 		}
 
 	}
@@ -59,6 +65,7 @@ public class VideoPlayerController : MonoBehaviour {
 		}
 
 		UpdatePlayPauseIcon();
+		ShowPlayerControl();
 
 	}
 
@@ -77,6 +84,7 @@ public class VideoPlayerController : MonoBehaviour {
 			m_videoPlayer.Play();
 
 		UpdatePlayPauseIcon();
+		ShowPlayerControl();
 	
 	}
 
@@ -97,14 +105,7 @@ public class VideoPlayerController : MonoBehaviour {
 		newTime = Mathf.Clamp((float)newTime, 0f, (float)m_videoPlayer.length);
 		m_videoPlayer.time = newTime;
 
-	}
-
-	private void OnSliderValueChanged(float value) {
-		
-		if (m_videoPlayer != null && m_videoPlayer.isPrepared) {
-			m_videoPlayer.time = value;
-			UpdateTimeTexts();
-		}
+		ShowPlayerControl();
 
 	}
 
@@ -156,10 +157,62 @@ public class VideoPlayerController : MonoBehaviour {
 		if (m_progressSlider != null)
 			m_progressSlider.value = (float)m_videoPlayer.time;
 	
+		if( m_videoPlayer.isPlaying && !m_isControlHidden ) {
+			m_controlHideTimeout += Time.deltaTime;
+			if( m_controlHideTimeout > m_controlHideMaxDuration ) {
+				m_controlHideFadeCoroutine = StartCoroutine(ControlHideFade());
+			}
+		}
+
 	}
 
 	public void SetupNewVideo(VideoClip videoClip) {
 		m_currentVideoClip = videoClip;
 	}
+
+	private IEnumerator ControlHideFade() {
+
+		m_isControlHidden = true;
+
+		float hideDuration = 1.0f;
+		float hideTimeout = 0.0f;
+
+		while( hideDuration > hideTimeout ) {
+			float newAlpha = Mathf.Lerp(1.0f, 0.0f, hideTimeout / hideDuration);
+			m_playerControl.alpha = newAlpha;
+			hideTimeout += Time.deltaTime;
+			yield return null;
+		}
+
+		m_playerControl.alpha = 0.0f;
+		m_playerControl.interactable = false;
+		m_controlHideFadeCoroutine = null;
+
+	}
+
+	public void ShowPlayerControl() {
+
+		if (m_controlHideFadeCoroutine != null)
+			StopCoroutine(m_controlHideFadeCoroutine);
+
+		m_controlHideFadeCoroutine = null;
+
+		m_isControlHidden = false;
+
+		m_controlHideTimeout = 0.0f;
+		m_playerControl.alpha = 1.0f;
+		m_playerControl.interactable = true;
+	
+	}
+
+	public void HidePlayerControl() {
+
+		m_isControlHidden = true;
+		m_playerControl.alpha = 0.0f;
+		m_playerControl.interactable = false;
+
+	}
+
+	public bool IsPlayerControlHidden() => m_isControlHidden;
 
 }

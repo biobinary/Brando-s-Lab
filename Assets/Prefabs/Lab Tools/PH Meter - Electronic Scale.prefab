@@ -5261,6 +5261,7 @@ GameObject:
   - component: {fileID: 5087109384727122742}
   - component: {fileID: 3905068942274120685}
   - component: {fileID: 7568416738478214386}
+  - component: {fileID: 7548172986775481872}
   - component: {fileID: 6857938195076989335}
   m_Layer: 6
   m_Name: PH Meter - Electronic Scale
@@ -5330,6 +5331,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_phInfoCard: {fileID: 4492793156169218997}
   m_rippleEffect: {fileID: 1799180389894625408}
+--- !u!114 &7548172986775481872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6871070967789560037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a794236e72d6ff4458362bdbe5a9fb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_audioDescription: {fileID: 8300000, guid: bbfc5df1f780fc348917a7b70b5c64ca, type: 3}
 --- !u!114 &6857938195076989335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5367,6 +5381,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7548172986775481872}
+        m_TargetAssemblyTypeName: ToolsExplainable, Assembly-CSharp
+        m_MethodName: OnHandleSelectedEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnselect:
     m_PersistentCalls:
       m_Calls:
@@ -5374,6 +5400,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Oculus.Interaction.AudioTrigger, Oculus.Interaction.Samples
         m_MethodName: PlayAudio
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7548172986775481872}
+        m_TargetAssemblyTypeName: ToolsExplainable, Assembly-CSharp
+        m_MethodName: OnHandleSelectedEvent
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
