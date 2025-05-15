@@ -42,10 +42,13 @@ public class TutorialInfoMenu : MonoBehaviour {
 		if (m_currentEnv == null) return;
 		m_isTutorialInitialized = true;
 
-		IReadOnlyList<PlaygroundTutorials.Tutorial> tutorials =
-			m_currentEnv.GetPlaygroundTutorials().GetAllTutorials();
+		PlaygroundTutorials playgroundTutorials = m_currentEnv.GetPlaygroundTutorials();
+		if (playgroundTutorials == null) 
+			return;
 
-		if (!tutorials.Any()) return;
+		IReadOnlyList<PlaygroundTutorials.Tutorial> tutorials = playgroundTutorials.GetAllTutorials();
+		if (!tutorials.Any()) 
+			return;
 
 		int currentTutorialButtonCount = m_desiredSpawnTransform.childCount;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using YourNamespace;
 using Oculus.Interaction;
 
-public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, IBurnable {
+public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, IPourable<ChemicalData>, IBurnable {
 
 	[Header("Container Settings")]
 	[SerializeField] private GameObject m_interactableGameObject;
@@ -75,7 +75,9 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 
 			float currentAddedVolume = salt.volume;
 			currentAddedVolume = Mathf.Min(salt.volume, m_maxVolume);
-			if (currentAddedVolume <= 0) return;
+			
+			if (currentAddedVolume <= 0) 
+				return;
 
 			m_salts.Add(new ChemicalPortion<MetalSaltData> {
 				data = salt.data,
@@ -170,16 +172,16 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 
 			m_isOnFire = true;
 
-			m_fireTriggerSFX.PlayAudio();
-
-			m_fireEffect.SetActive(true);
-			m_interactableGameObject.SetActive(false);
-
 			float fireStrength = currentSalt.volume / m_maxVolume;
 
 			VFX_FireController fireController = m_fireEffect.GetComponent<VFX_FireController>();
 			fireController.SetFireColor(currentSalt.data.flameColor);
 			fireController.SetFireIntensity(fireStrength);
+
+			m_fireTriggerSFX.PlayAudio();
+
+			m_fireEffect.SetActive(true);
+			m_interactableGameObject.SetActive(false);
 
 			CheckColorObjectives(currentSalt.data.GetColorName());
 
@@ -251,7 +253,7 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 
 	private void Update() {
 		
-		if( m_isBurning ) {
+		if( m_isBurning && !m_isOnFire ) {
 			m_burnTimer += Time.deltaTime;
 			if( m_burnTimer > m_maxBurnTime ) {
 				StopBurning();
@@ -259,6 +261,10 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 			}
 		}
 
+	}
+
+	public void PourObject(List<ChemicalPortion<ChemicalData>> chemicals, Vector3 pourLocation) {
+		; // To Do Here ....
 	}
 
 }

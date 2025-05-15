@@ -16,14 +16,8 @@ public class GasLighter : TriggerBasedTool {
 	[Header("SFX")]
 	[SerializeField] private AudioSource m_fireSoundEffect;
 
-	ParticleSystem.ShapeModule m_shapeModule;
-
 	private bool m_isCastFire = false;
 	private IBurnable m_currentBurnable= null;
-
-	private void Awake() {
-		m_shapeModule = m_fireEffect.shape;
-	}
 
 	protected override void OnHandleTriggerPressed() {
 

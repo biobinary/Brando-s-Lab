@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df47eaa9e45768b4b9e52a6e586a5f74, type: 3}
+  m_Name: C3H8O3
+  m_EditorClassIdentifier: 
+  chemicalName: Gliserol
+  formula: C3H8O3
+  description: Gliserol adalah cairan kental, tidak berwarna, tidak berbau, dan manis.
+    Digunakan sebagai pelarut dan bahan dalam produk farmasi dan kosmetik.
+  audioDescription: {fileID: 0}
+  type: 2
+  strength: 2
+  concentration: 1
+  molarMass: 92.09
+  Ka: 0
+  Kb: 0
