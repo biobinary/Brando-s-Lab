@@ -19,3 +19,4 @@ MonoBehaviour:
     efek warna permanganat yang kuat.
   audioDescription: {fileID: 8300000, guid: cb1640b3c5432d64391665b1ba1000cc, type: 3}
   flameColor: {r: 0.6, g: 0, b: 1, a: 1}
+  saltColor: {r: 0.26700002, g: 0.26700002, b: 0.26700002, a: 1}

@@ -5,6 +5,7 @@ public class MetalSaltData : ChemicalBaseData {
 
 	[Header("Flame‑Test Data")]
 	public Color flameColor = Color.white;
+	public Color saltColor = Color.white;
 
 	public string GetColorName() {
 

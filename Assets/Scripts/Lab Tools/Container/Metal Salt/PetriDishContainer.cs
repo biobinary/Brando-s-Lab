@@ -10,15 +10,18 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 	[SerializeField] private GameObject m_interactableGameObject;
 	[SerializeField] private float m_maxVolume = 10.0f;
 	[SerializeField] private float m_maxBurnTime = 1.0f;
+	[SerializeField] private float m_explosionDelayDuration = 5.0f;
 
 	[Header("Salt Visual Settings")]
 	[SerializeField] private GameObject m_saltVisual;
 	[SerializeField] private float m_saltEmptyScale = 0.0f;
 	[SerializeField] private float m_saltFullScale = 0.06f;
 
-	[Header("Fire Visual Settings")]
+	[Header("Visual Effect Settings")]
 	[SerializeField] private GameObject m_fireEffect;
 	[SerializeField] private float m_maxFireTimeout = 8.0f;
+	[SerializeField] private ParticleSystem m_greySmoke;
+	[SerializeField] private GameObject m_explosionPrefab;
 
 	[Header("Sound Effect Settings")]
 	[SerializeField] private AudioTrigger m_fireTriggerSFX;
@@ -28,6 +31,9 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 
 	private bool m_isOnFire = false;
 	private Coroutine m_onFireCoroutine = null;
+
+	private bool m_isWaitForExplosion = false;
+	private Coroutine m_waitForExplosionCoroutine = null;
 
 	private float m_burnTimer = 0f;
 	private bool m_isBurning = false;
@@ -50,6 +56,9 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 		if( m_onFireCoroutine != null )
 			HandleFireTimeout();
 
+		if( m_isWaitForExplosion )
+			StopExplosiveReaction();
+
 	}
 
 	public override void AddChemical(ChemicalPortion<MetalSaltData> salt) {
@@ -65,7 +74,9 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 
 				float currentAddedVolume = salt.volume;
 				currentAddedVolume = Mathf.Min(salt.volume, m_maxVolume - currentSalt.volume);
-				if (currentAddedVolume <= 0) return;
+				
+				if (currentAddedVolume <= 0) 
+					return;
 
 				currentSalt.volume += currentAddedVolume;
 
@@ -85,6 +96,15 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 			});
 
 		}
+
+		Color newColor = GetNewSaltBlendedColor();
+		m_saltParticlesRenderer.material.SetColor("_BaseColor", newColor);
+
+		newColor.a = 1.0f;
+
+		Renderer renderer = m_saltVisual.GetComponent<Renderer>();
+		if (renderer != null)
+			renderer.material.SetColor("_BaseColor", newColor);
 
 		UpdateVisual();
 
@@ -253,7 +273,7 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 
 	private void Update() {
 		
-		if( m_isBurning && !m_isOnFire ) {
+		if( m_isBurning && !m_isOnFire & !m_isWaitForExplosion ) {
 			m_burnTimer += Time.deltaTime;
 			if( m_burnTimer > m_maxBurnTime ) {
 				StopBurning();
@@ -263,8 +283,78 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 
 	}
 
+	private void TriggerExplosiveReaction() {
+
+		m_isWaitForExplosion = true;
+
+		m_greySmoke.gameObject.SetActive(true);
+		m_interactableGameObject.SetActive(false);
+
+		m_greySmoke.Play();
+
+		m_waitForExplosionCoroutine = StartCoroutine(WaitAndInitiateExplosion());
+
+	}
+
+	private void StopExplosiveReaction() {
+
+		if( m_waitForExplosionCoroutine != null )
+			StopCoroutine( m_waitForExplosionCoroutine );
+
+		m_isWaitForExplosion = false;
+		m_waitForExplosionCoroutine = null;
+
+		m_greySmoke.Stop();
+
+		m_greySmoke.gameObject.SetActive(false);
+		m_interactableGameObject.SetActive(true);
+
+	}
+
+	private IEnumerator WaitAndInitiateExplosion() {
+
+		yield return new WaitForSeconds(m_explosionDelayDuration);
+
+		float currentVolume = 0.0f;
+		ChemicalPortion<MetalSaltData> currentSalt = m_salts?.Count > 0 ? m_salts[0] : null;
+		if ( currentSalt != null )
+			currentVolume = currentSalt.volume;
+
+		GameObject explosion = Instantiate(m_explosionPrefab);
+		explosion.transform.position = transform.position;
+		explosion.transform.localScale *= (currentVolume / m_maxVolume);
+
+		m_salts.Clear();
+		UpdateVisual();
+
+		m_playgroundObjective.SetCompletion(
+			"Buatlah Ledakan dari Campuran Kalium Permanganat dan Gliserol");
+
+		StopExplosiveReaction();
+
+	}
+
 	public void PourObject(List<ChemicalPortion<ChemicalData>> chemicals, Vector3 pourLocation) {
-		; // To Do Here ....
+
+		ChemicalPortion<MetalSaltData> currentSalt = m_salts?.Count > 0 ? m_salts[0] : null;
+
+		if(currentSalt == null)
+			return;
+
+		foreach (ChemicalPortion<ChemicalData> chemical in chemicals) {
+			
+			if( chemical.data.name == "C3H8O3" && currentSalt.data.name == "KMnO4") {
+
+				if (currentSalt.volume <= (m_maxVolume * (1.0f /4.0f)))
+					return;
+
+				if (!m_isWaitForExplosion)
+					TriggerExplosiveReaction();
+
+			}
+
+		}
+
 	}
 
 }

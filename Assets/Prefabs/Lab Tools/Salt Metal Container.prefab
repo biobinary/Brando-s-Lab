@@ -5804,6 +5804,7 @@ MonoBehaviour:
   m_initialSalt:
     data: {fileID: 0}
     volume: 0
+  m_saltParticles: {fileID: 9068296869673059271}
 --- !u!114 &7673345956671713439
 MonoBehaviour:
   m_ObjectHideFlags: 0

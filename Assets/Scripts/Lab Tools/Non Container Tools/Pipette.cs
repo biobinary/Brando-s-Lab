@@ -35,12 +35,12 @@ public class Pipette : TriggerBasedTool {
 		new Dictionary<string, ChemicalPortion<ChemicalData>>();
 	
 	private float m_currentVolume = 0.0f;
-
 	private bool m_isPouring = false;
 
 	private void OnEnable() {
 		
 		m_contents.Clear();
+		m_currentVolume = 0.0f;
 
 		if( m_initialChemicals.Any() ) {
 
@@ -121,6 +121,7 @@ public class Pipette : TriggerBasedTool {
 			chemicalPortion.volume += currentAddedVolume;
 
 		} else {
+
 			m_contents.Add(
 				chemical.data.name,
 				new ChemicalPortion<ChemicalData> {
@@ -139,10 +140,9 @@ public class Pipette : TriggerBasedTool {
 		if (m_currentVolume <= 0.0f)
 			return null;
 
+		List<string> chemicalsToRemove = new List<string>();
 		List<ChemicalPortion<ChemicalData>> chemicalsRemovePortion =
 			new List<ChemicalPortion<ChemicalData>>();
-
-		List<string> chemicalsToRemove = new List<string>();
 
 		float removalRatio = Mathf.Min(1.0f, amount / m_currentVolume);
 
@@ -168,13 +168,15 @@ public class Pipette : TriggerBasedTool {
 
 		}
 
-		foreach (string chemicalName in chemicalsToRemove) {
-			m_contents.Remove(chemicalName);
-		}
-
 		if( !m_transferOnly ) {
+
+			foreach (string chemicalName in chemicalsToRemove) {
+				m_contents.Remove(chemicalName);
+			}
+
 			m_currentVolume -= amount;
 			m_currentVolume = Mathf.Max(0, m_currentVolume);
+		
 		}
 
 		return chemicalsRemovePortion;
