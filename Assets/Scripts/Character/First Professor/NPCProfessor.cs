@@ -131,8 +131,14 @@ public class NPCProfessor : MonoBehaviour {
 		m_npcAudioSource.Play();
 		MusicManager.Instance.MuffleMusic(0.15f, 0.5f);
 
-		while (m_npcAudioSource.isPlaying)
+		while (m_npcAudioSource.isPlaying) {
+
+			if (!MusicManager.Instance.IsOnMuffle())
+				MusicManager.Instance.MuffleMusic(0.15f, 0.0f);
+
 			yield return null;
+
+		}
 
 		MusicManager.Instance.CancelMuffle(1.0f);
 		m_monologueProgress = null;

@@ -231,4 +231,6 @@ public class MusicManager : MonoBehaviour {
 
 	public bool IsPlaying() => m_audioSource.isPlaying && !m_isMuted;
 
+	public bool IsOnMuffle() => m_isOnMuffle;
+
 }
