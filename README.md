@@ -4,14 +4,14 @@
 
 > ⚠️ **Peringatan Konten:** Game ini banyak menggunakan bahasa yang kasar sehingga ditujukan untuk pemain berusia **18 tahun ke atas**.
 
-## 🎬 Watch the Trailer Now
+## 🎬 Tonton Cuplikannya Sekarang!
 
 [![Watch the video](https://img.youtube.com/vi/bIbF3d0Razw/maxresdefault.jpg)](https://youtu.be/bIbF3d0Razw?si=NPQEo655bWX7ezC7)
 
 ## 🧪 Deskripsi
 
 Selamat datang di laboratorium Brando!  
-Mulailah bereksperimen bersama Professor Brando untuk mengenal lebih dalam dunia kimia. Di lingkungan yang aman dan interaktif ini, kamu bebas mengeksplorasi berbagai reaksi kimia dari permainan warna asam dan basa, hingga percikan api dan reaksi garam logam.
+Mulailah bereksperimen bersama Professor Brando untuk mengenal lebih dalam dunia kimia. Di lingkungan yang aman dan interaktif ini, kamu bebas mengeksplorasi berbagai reaksi kimia dari permainan warna asam dan basa; percikan api dan reaksi garam logam; hingga eksperimen yang melibatkan sebuah ledakan.
 
 Setiap eksperimen dirancang untuk memberikan pemahaman intuitif tentang konsep dasar kimia, sambil tetap menghibur walau disertai gaya bahasa kasar khas Profesor Brando.
 
