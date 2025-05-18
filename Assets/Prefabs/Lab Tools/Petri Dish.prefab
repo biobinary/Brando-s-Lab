@@ -10441,7 +10441,6 @@ MonoBehaviour:
   m_greySmoke: {fileID: 4965289630992666156}
   m_explosionPrefab: {fileID: 1794180328120860836, guid: 911e776107b6fc540a26ce602be522cb, type: 3}
   m_fireTriggerSFX: {fileID: 572331168261525676}
-  m_playgroundObjective: {fileID: 11400000, guid: 31fd2000d03ee1646b87405dccde89f1, type: 2}
 --- !u!114 &2044404311988124841
 MonoBehaviour:
   m_ObjectHideFlags: 0

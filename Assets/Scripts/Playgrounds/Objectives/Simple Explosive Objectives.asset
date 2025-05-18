@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdd3721ca5af7349b902323a60a5489, type: 3}
   m_Name: Simple Explosive Objectives
   m_EditorClassIdentifier: 
-  m_objectiveIntroductionMonologueName: 
+  m_objectiveIntroductionMonologueName: Simple Explosive Introduction
   m_instructionList:
-  - instructions: Buatlah Ledakan dari Campuran Kalium Permanganat dan Gliserol
-    objectiveAudioHint: {fileID: 0}
+  - instructions: Buat Ledakan dari Kalium Permanganat dan Gliserol
+    objectiveAudioHint: {fileID: 8300000, guid: bb6dc4138870ce948ac250621d316f4e, type: 3}
     isComplete: 0

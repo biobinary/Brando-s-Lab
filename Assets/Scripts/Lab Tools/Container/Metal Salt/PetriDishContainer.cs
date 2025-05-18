@@ -26,9 +26,6 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 	[Header("Sound Effect Settings")]
 	[SerializeField] private AudioTrigger m_fireTriggerSFX;
 
-	[Header("Objectives")]
-	public PlaygroundObjective m_playgroundObjective;
-
 	private bool m_isOnFire = false;
 	private Coroutine m_onFireCoroutine = null;
 
@@ -221,35 +218,35 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 		switch(colorName) {
 			
 			case "Merah":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Merah");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Merah");
 				break;
 			
 			case "Kuning":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Kuning");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Kuning");
 				break;
 			
 			case "Oren":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Oren");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Oren");
 				break;
 
 			case "Hijau":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Hijau");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Hijau");
 				break;
 
 			case "Cyan":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Cyan");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Cyan");
 				break;
 
 			case "Biru":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Biru");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Biru");
 				break;
 
 			case "Ungu":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Ungu");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Ungu");
 				break;
 
 			case "Magenta":
-				m_playgroundObjective.SetCompletion("Buat Api yang Berwarna Magenta");
+				ObjectiveCompletionManager.Instance.SetObjectiveCompletion("Buat Api yang Berwarna Magenta");
 				break;
 
 
@@ -327,8 +324,8 @@ public class PetriDishContainer : MetalSaltContainer, IPourable<MetalSaltData>, 
 		m_salts.Clear();
 		UpdateVisual();
 
-		m_playgroundObjective.SetCompletion(
-			"Buatlah Ledakan dari Campuran Kalium Permanganat dan Gliserol");
+		ObjectiveCompletionManager.Instance.SetObjectiveCompletion(
+			"Buat Ledakan dari Kalium Permanganat dan Gliserol");
 
 		StopExplosiveReaction();
 

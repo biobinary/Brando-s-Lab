@@ -5,7 +5,6 @@ using UnityEngine;
 public class ContainerExplainable : MonoBehaviour, IExplainable {
 
 	[SerializeField] private MonoBehaviour chemicalContainer;
-	[SerializeField] private PlaygroundObjective m_playgroundObjectives;
 
 	private bool m_isSelected = false;
 
@@ -52,15 +51,12 @@ public class ContainerExplainable : MonoBehaviour, IExplainable {
 
 	private void MarkChemicalIdentificationObjective<T>(T chemicalData) where T : ChemicalBaseData {
 
-		if (m_playgroundObjectives == null)
-			return;
-
 		string chemicalFormula = chemicalData.formula;
 		if (string.IsNullOrEmpty(chemicalFormula)) 
 			return;
 
 		string objectiveText = $"Identifikasi Senyawa {chemicalFormula}";
-		m_playgroundObjectives.SetCompletion(objectiveText);
+		ObjectiveCompletionManager.Instance.SetObjectiveCompletion(objectiveText);
 
 	}
 

@@ -14,4 +14,8 @@ public abstract class ChemicalBaseData : ScriptableObject, IExplainableChemical 
 	public string description;
 	public AudioClip audioDescription;
 
+	private void OnEnable() {
+		hasBeenExplained = false;
+	}
+
 }

@@ -27,10 +27,6 @@ public class ChemicalData : ChemicalBaseData {
 	[Tooltip("Kb value for bases (e.g. 1.8e-5 for ammonia)")]
 	public float Kb = 0f;
 
-	private void OnEnable() {
-		hasBeenExplained = false;
-	}
-
 	public float GetDissociationConstant() {
 		
 		switch (type) {

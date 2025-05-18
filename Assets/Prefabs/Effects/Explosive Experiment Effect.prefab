@@ -10007,7 +10007,7 @@ MonoBehaviour:
   _audioClips:
   - {fileID: 8300000, guid: 5697d536664abef40838348736872369, type: 3}
   - {fileID: 8300000, guid: 14db4aefa2dd7ac4d9971601aa9934c8, type: 3}
-  _volume: 0.854
+  _volume: 0.8
   _volumeRandomization:
     _useRandomRange: 0
     _min: 0

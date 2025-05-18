@@ -145,4 +145,23 @@ public class PlaygroundObjective : ScriptableObject {
 
 	}
 
+	public bool HasInstruction(string instruction) {
+		
+		if (string.IsNullOrEmpty(instruction))
+			return false;
+
+		foreach (ObjectiveInstruction objective in m_instructionList) {
+			if (string.Equals(objective.instructions, instruction)) {
+				return true;
+			}
+		}
+
+		return false;
+
+	}
+
+	public bool HasInstruction(int idx) {
+		return idx >= 0 && idx < m_instructionList.Count;
+	}
+
 }
