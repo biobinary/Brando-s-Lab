@@ -40,39 +40,39 @@ public class TutorialInfoMenu : MonoBehaviour {
 	private void InitializedTutorial() {
 
 		if (m_currentEnv == null) return;
+
 		m_isTutorialInitialized = true;
 
-		PlaygroundTutorials playgroundTutorials = m_currentEnv.GetPlaygroundTutorials();
-		if (playgroundTutorials == null) 
-			return;
+		var playgroundTutorials = m_currentEnv.GetPlaygroundTutorials();
+		if (playgroundTutorials == null) return;
 
-		IReadOnlyList<PlaygroundTutorials.Tutorial> tutorials = playgroundTutorials.GetAllTutorials();
-		if (!tutorials.Any()) 
-			return;
+		var tutorials = playgroundTutorials.GetAllTutorials();
+		if (tutorials == null || tutorials.Count == 0) return;
 
-		int currentTutorialButtonCount = m_desiredSpawnTransform.childCount;
+		int totalTutorials = tutorials.Count;
+		int currentButtonCount = m_desiredSpawnTransform.childCount;
 
-		for (int i = currentTutorialButtonCount - 1; i > (tutorials.Count - 1); i--) {
+		for (int i = totalTutorials; i < currentButtonCount; i++) {
 			m_desiredSpawnTransform.GetChild(i).gameObject.SetActive(false);
 		}
 
-		int index = 0;
+		for (int i = 0; i < totalTutorials; i++) {
+			
+			GameObject tutorialButtonObject;
 
-		while (index != tutorials.Count) {
+			if (i >= currentButtonCount) {
+				tutorialButtonObject = Instantiate(m_tutorialButtonObject, m_desiredSpawnTransform);
+			
+			} else {
+				tutorialButtonObject = m_desiredSpawnTransform.GetChild(i).gameObject;
+				tutorialButtonObject.SetActive(true);
+			}
 
-			GameObject tutorialButtonGameobject;
-
-			if( index > (currentTutorialButtonCount - 1) )
-				tutorialButtonGameobject = Instantiate(m_tutorialButtonObject, m_desiredSpawnTransform);
-			else
-				tutorialButtonGameobject = m_desiredSpawnTransform.GetChild(index).gameObject;
-
-			TutorialButton tutorialButton = tutorialButtonGameobject.GetComponent<TutorialButton>();
-			tutorialButton.SetupButton(this, tutorials[index]);
-
-			index++;
+			var tutorialButton = tutorialButtonObject.GetComponent<TutorialButton>();
+			tutorialButton.SetupButton(this, tutorials[i]);
 
 		}
+
 
 	}
 

@@ -13,13 +13,17 @@ MonoBehaviour:
   m_Name: Acid Base Tutorial
   m_EditorClassIdentifier: 
   m_tutorialList:
-  - tutorialName: Cara Minta Bantuan ke Professor Brando
-    tutorialVideo: {fileID: 32900000, guid: 89c69a4a8a3d75846a32ad47dadd416a, type: 3}
+  - tutorialName: Cara Tanya Deskripsi Alat dan Bahan
+    tutorialVideo: {fileID: 32900000, guid: 004f102d69c21e84e9b30cb3f1fe0652, type: 3}
   - tutorialName: Cara Lihat Informasi Larutan
-    tutorialVideo: {fileID: 32900000, guid: 89c69a4a8a3d75846a32ad47dadd416a, type: 3}
+    tutorialVideo: {fileID: 32900000, guid: c768347f16ff7354b856ec6cc8631d3a, type: 3}
   - tutorialName: Cara Menuangkan Larutan
-    tutorialVideo: {fileID: 32900000, guid: 89c69a4a8a3d75846a32ad47dadd416a, type: 3}
+    tutorialVideo: {fileID: 32900000, guid: 4df0278e412b0ee46ba07e4b9af21a50, type: 3}
   - tutorialName: Cara Pakek PH Meter Tembakan
-    tutorialVideo: {fileID: 32900000, guid: 89c69a4a8a3d75846a32ad47dadd416a, type: 3}
+    tutorialVideo: {fileID: 32900000, guid: 315bd3e972bdc68479a9c24fe67687b1, type: 3}
   - tutorialName: Cara Pakek PH Meter Timbangan
-    tutorialVideo: {fileID: 32900000, guid: 89c69a4a8a3d75846a32ad47dadd416a, type: 3}
+    tutorialVideo: {fileID: 32900000, guid: 9d3471ba1c2be414fa4b3d3503809c86, type: 3}
+  - tutorialName: Cara Membuang Cairan
+    tutorialVideo: {fileID: 32900000, guid: 472442af2b099124f9ac24047e3a0a54, type: 3}
+  - tutorialName: Cara Minta Bantuan Tugas
+    tutorialVideo: {fileID: 32900000, guid: 9e8cbde726e9fea4a99cb65ef4f00505, type: 3}

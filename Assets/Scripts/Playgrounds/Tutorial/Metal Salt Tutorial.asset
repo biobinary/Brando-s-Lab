@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Metal Salt Tutorial
   m_EditorClassIdentifier: 
   m_tutorialList:
-  - tutorialName: Cara Minta Bantuan ke Professor Brando
-    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}
+  - tutorialName: Cara Tanya Deskripsi Alat dan Bahan
+    tutorialVideo: {fileID: 32900000, guid: eebce9225b2965443b8f4e10a719c9de, type: 3}
   - tutorialName: Cara Lihat Informasi Garam
-    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}
+    tutorialVideo: {fileID: 32900000, guid: f3724e53192059249926830e715d9f85, type: 3}
   - tutorialName: Cara Menuangkan Garam Ke Petri DIsh
-    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}
+    tutorialVideo: {fileID: 32900000, guid: 47acd7f24a744b1489c58ecf2ad18a2c, type: 3}
   - tutorialName: Cara Membakar Garam Logam
-    tutorialVideo: {fileID: 32900000, guid: 2c246ec50aabf3f42b84891f54a5bdb6, type: 3}
+    tutorialVideo: {fileID: 32900000, guid: 809255ca85d75424e8e6a4e5ac3b02e9, type: 3}
+  - tutorialName: Cara Tanya Detail Tugas
+    tutorialVideo: {fileID: 32900000, guid: 43c880e7d1d406d43a22c4edbe0dd648, type: 3}

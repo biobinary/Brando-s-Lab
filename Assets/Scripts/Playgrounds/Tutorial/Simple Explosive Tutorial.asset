@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c92923618df652e46902a88848d573f4, type: 3}
+  m_Name: Simple Explosive Tutorial
+  m_EditorClassIdentifier: 
+  m_tutorialList:
+  - tutorialName: Cara Tanya Deskripsi Alat dan Bahan
+    tutorialVideo: {fileID: 32900000, guid: b02539e3920552a488a491e68ef03fb4, type: 3}
+  - tutorialName: Cara Menggunakan Pipet
+    tutorialVideo: {fileID: 32900000, guid: 92837f3fd13e6534795aeae35e227b40, type: 3}
+  - tutorialName: Cara Menuangkan Serbuk Logam
+    tutorialVideo: {fileID: 32900000, guid: 667f8f82b2e812d40ae1dc37b8492994, type: 3}
