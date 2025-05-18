@@ -202,7 +202,8 @@ public class VideoPlayerController : MonoBehaviour {
 		m_controlHideTimeout = 0.0f;
 		m_playerControl.alpha = 1.0f;
 		m_playerControl.interactable = true;
-	
+		m_playerControl.blocksRaycasts = true;
+
 	}
 
 	public void HidePlayerControl() {
@@ -210,6 +211,7 @@ public class VideoPlayerController : MonoBehaviour {
 		m_isControlHidden = true;
 		m_playerControl.alpha = 0.0f;
 		m_playerControl.interactable = false;
+		m_playerControl.blocksRaycasts = false;
 
 	}
 

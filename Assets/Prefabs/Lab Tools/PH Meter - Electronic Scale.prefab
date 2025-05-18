@@ -5673,7 +5673,7 @@ GameObject:
   - component: {fileID: 2124032349682741147}
   m_Layer: 6
   m_Name: weighs_electronic
-  m_TagString: Untagged
+  m_TagString: Tools
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
