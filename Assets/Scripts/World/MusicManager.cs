@@ -131,18 +131,17 @@ public class MusicManager : MonoBehaviour {
 		m_isOnMuffle = true;
 		m_muffleVolume = targetVolume;
 
+		if (m_volumeFadeCoroutine != null)
+			StopCoroutine(m_volumeFadeCoroutine);
+
 		if (fadeDuration <= 0 || m_isMuted) {
-			
-			if (!m_isMuted) {
+
+			if (!m_isMuted)
 				m_audioSource.volume = targetVolume;
-			}
-			
+
+			m_volumeFadeCoroutine = null;
 			return;
 
-		}
-
-		if (m_volumeFadeCoroutine != null) {
-			StopCoroutine(m_volumeFadeCoroutine);
 		}
 
 		m_volumeFadeCoroutine = StartCoroutine(FadeVolumeCoroutine(targetVolume, fadeDuration));
@@ -153,20 +152,17 @@ public class MusicManager : MonoBehaviour {
 
 		m_isOnMuffle = false;
 
+		if (m_volumeFadeCoroutine != null)
+			StopCoroutine(m_volumeFadeCoroutine);
+
 		if (fadeDuration <= 0 || m_isMuted) {
 			
-			if (!m_isMuted) {
+			if (!m_isMuted)
 				m_audioSource.volume = m_savedVolume;
-			
-			}
-			
+
+			m_volumeFadeCoroutine = null;
 			return;
 
-		}
-
-
-		if (m_volumeFadeCoroutine != null) {
-			StopCoroutine(m_volumeFadeCoroutine);
 		}
 
 		m_volumeFadeCoroutine = StartCoroutine(FadeVolumeCoroutine(m_savedVolume, fadeDuration));
