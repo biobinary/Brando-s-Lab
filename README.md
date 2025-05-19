@@ -35,7 +35,7 @@ Setiap eksperimen dirancang untuk memberikan pemahaman intuitif tentang konsep d
 
 ## 🌟 Fitur Utama
 
-- Eksperimen kimia interaktif: asam basa dan garam logam
+- Eksperimen kimia interaktif: asam basa, garam logam, dan ledakan sederhana
 - Visualisasi reaksi berwarna yang mendidik dan menarik
 - Suara narator dinamis dan penuh ekspresi dari AI (Eleven Labs)
 - Lingkungan laboratorium 3D yang aman untuk belajar
