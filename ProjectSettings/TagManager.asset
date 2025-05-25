@@ -5,6 +5,20 @@ TagManager:
   serializedVersion: 3
   tags:
   - Tools
+  - QDSUISecondaryButton
+  - QDSUIPrimaryButton
+  - QDSUISharedThemeColor
+  - QDSUIAccentColor
+  - QDSUITextInvertedColor
+  - QDSUIIcon
+  - QDSUITextSecondaryInvertedColor
+  - QDSUIToggleButton
+  - QDSUIBackplateGradient
+  - QDSUISection
+  - QDSUIBorderlessButton
+  - QDSUITextSecondaryColor
+  - QDSUIToggleCheckboxRadio
+  - QDSUITooltip
   layers:
   - Default
   - TransparentFX
@@ -14,7 +28,7 @@ TagManager:
   - UI
   - Tools
   - Fill Area
-  - 
+  - Player Head
   - 
   - 
   - 

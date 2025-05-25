@@ -23,6 +23,7 @@ public class NPCProfessor : MonoBehaviour {
 	private Dictionary<string, NPCMonologue> m_monologuesDict = new Dictionary<string, NPCMonologue>();
 
 	private Coroutine m_monologueProgress = null;
+	private bool m_isContinueProgress = false;
 
 	[HideInInspector]
 	public bool isSpeaking {
@@ -57,7 +58,40 @@ public class NPCProfessor : MonoBehaviour {
 		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnHandleLoadNewEnvironment;
 
 	}
-	
+
+	private void OnTriggerEnter(Collider other) {
+
+		if (!other.CompareTag("Player"))
+			return;
+
+		if( m_isContinueProgress ) {
+			m_monologueProgress = StartCoroutine(StartMonologueProgress());
+			m_isContinueProgress = false;
+		}
+
+	}
+
+	private void OnTriggerExit(Collider other) {
+
+		if (!other.CompareTag("Player"))
+			return;
+
+		if( m_monologueProgress != null ) {
+			
+			StopCoroutine(m_monologueProgress);
+			m_monologueProgress = null;
+
+			MusicManager.Instance.CancelMuffle(1.0f);
+
+			if ( m_npcAudioSource != null )
+				m_npcAudioSource.Pause();
+
+			m_isContinueProgress = true;
+
+		}
+
+	}
+
 	private void OnHandleLoadNewEnvironment(PlaygroundEnvironment env) {
 
 		if (env == null)
