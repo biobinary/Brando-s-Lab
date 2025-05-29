@@ -1,90 +1,93 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using BrandosLab.Playgrounds;
 
-public class TutorialInfoMenu : MonoBehaviour {
+namespace BrandosLab.UI {
 
-	private PlaygroundEnvironment m_currentEnv = null;
-	private bool m_isTutorialInitialized = false;
+	public class TutorialInfoMenu : MonoBehaviour {
 
-	[SerializeField] private VideoPlayerController m_videoPlayer;
-	[SerializeField] private GameObject m_tutorialListGameobject;
-	[SerializeField] private Transform m_desiredSpawnTransform;
-	[SerializeField] private GameObject m_tutorialButtonObject;
+		private PlaygroundEnvironment m_currentEnv = null;
+		private bool m_isTutorialInitialized = false;
 
-	private void Awake() {
+		[SerializeField] private VideoPlayerController m_videoPlayer;
+		[SerializeField] private GameObject m_tutorialListGameobject;
+		[SerializeField] private Transform m_desiredSpawnTransform;
+		[SerializeField] private GameObject m_tutorialButtonObject;
 
-		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += (PlaygroundEnvironment env) => {
-			m_currentEnv = env;
-		};
+		private void Awake() {
 
-		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += () => {
+			PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += (PlaygroundEnvironment env) => {
+				m_currentEnv = env;
+			};
 
-			m_tutorialListGameobject.SetActive(true);
-			m_videoPlayer.gameObject.SetActive(false);
+			PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += () => {
 
-			m_currentEnv = null;
-			m_isTutorialInitialized = false;
+				m_tutorialListGameobject.SetActive(true);
+				m_videoPlayer.gameObject.SetActive(false);
 
-		};
-	
-	}
+				m_currentEnv = null;
+				m_isTutorialInitialized = false;
 
-	private void OnEnable() {
+			};
 
-		if (!m_isTutorialInitialized)
-			InitializedTutorial();
-
-	}
-
-	private void InitializedTutorial() {
-
-		if (m_currentEnv == null) return;
-
-		m_isTutorialInitialized = true;
-
-		var playgroundTutorials = m_currentEnv.GetPlaygroundTutorials();
-		if (playgroundTutorials == null) return;
-
-		var tutorials = playgroundTutorials.GetAllTutorials();
-		if (tutorials == null || tutorials.Count == 0) return;
-
-		int totalTutorials = tutorials.Count;
-		int currentButtonCount = m_desiredSpawnTransform.childCount;
-
-		for (int i = totalTutorials; i < currentButtonCount; i++) {
-			m_desiredSpawnTransform.GetChild(i).gameObject.SetActive(false);
 		}
 
-		for (int i = 0; i < totalTutorials; i++) {
-			
-			GameObject tutorialButtonObject;
+		private void OnEnable() {
 
-			if (i >= currentButtonCount) {
-				tutorialButtonObject = Instantiate(m_tutorialButtonObject, m_desiredSpawnTransform);
-			
-			} else {
-				tutorialButtonObject = m_desiredSpawnTransform.GetChild(i).gameObject;
-				tutorialButtonObject.SetActive(true);
+			if (!m_isTutorialInitialized)
+				InitializedTutorial();
+
+		}
+
+		private void InitializedTutorial() {
+
+			if (m_currentEnv == null) return;
+
+			m_isTutorialInitialized = true;
+
+			var playgroundTutorials = m_currentEnv.GetPlaygroundTutorials();
+			if (playgroundTutorials == null) return;
+
+			var tutorials = playgroundTutorials.GetAllTutorials();
+			if (tutorials == null || tutorials.Count == 0) return;
+
+			int totalTutorials = tutorials.Count;
+			int currentButtonCount = m_desiredSpawnTransform.childCount;
+
+			for (int i = totalTutorials; i < currentButtonCount; i++) {
+				m_desiredSpawnTransform.GetChild(i).gameObject.SetActive(false);
 			}
 
-			var tutorialButton = tutorialButtonObject.GetComponent<TutorialButton>();
-			tutorialButton.SetupButton(this, tutorials[i]);
+			for (int i = 0; i < totalTutorials; i++) {
+
+				GameObject tutorialButtonObject;
+
+				if (i >= currentButtonCount) {
+					tutorialButtonObject = Instantiate(m_tutorialButtonObject, m_desiredSpawnTransform);
+
+				} else {
+					tutorialButtonObject = m_desiredSpawnTransform.GetChild(i).gameObject;
+					tutorialButtonObject.SetActive(true);
+				}
+
+				var tutorialButton = tutorialButtonObject.GetComponent<TutorialButton>();
+				tutorialButton.SetupButton(this, tutorials[i]);
+
+			}
+
 
 		}
 
+		public void OnHandleTutorialButtonPressed(TutorialButton button) {
 
-	}
+			if (button.tutorial?.tutorialVideo == null) return;
 
-	public void OnHandleTutorialButtonPressed(TutorialButton button) {
+			m_videoPlayer.SetupNewVideo(button.tutorial.tutorialVideo);
 
-		if (button.tutorial?.tutorialVideo == null) return;
+			m_tutorialListGameobject.SetActive(false);
+			m_videoPlayer.gameObject.SetActive(true);
 
-		m_videoPlayer.SetupNewVideo(button.tutorial.tutorialVideo);
 
-		m_tutorialListGameobject.SetActive(false);
-		m_videoPlayer.gameObject.SetActive(true);
-
+		}
 
 	}
 

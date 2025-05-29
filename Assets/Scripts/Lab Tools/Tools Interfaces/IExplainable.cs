@@ -1,8 +1,12 @@
 using UnityEngine;
 
-public interface IExplainable {
+namespace BrandosLab.LabTools.Model {
+    
+    public interface IExplainable {
 
-    public bool IsCanExplain();
-    public AudioClip GetExplanationVoiceOverClip();
+        public bool IsCanExplain();
+        public AudioClip GetExplanationVoiceOverClip();
+
+    }
 
 }

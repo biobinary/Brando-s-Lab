@@ -1,27 +1,32 @@
-using Oculus.Interaction;
 using UnityEngine;
+using Oculus.Interaction;
+using BrandosLab.LabTools.Model;
 
-public class ToolsExplainable : MonoBehaviour, IExplainable {
+namespace BrandosLab.LabTools {
 
-	[SerializeField] private AudioClip m_audioDescription;
-	
-	private bool m_isSelected = false;
+	public class ToolsExplainable : MonoBehaviour, IExplainable {
 
-	public void OnHandleSelectedEvent(PointerEvent pointerEvent) {
+		[SerializeField] private AudioClip m_audioDescription;
+
+		private bool m_isSelected = false;
+
+		public void OnHandleSelectedEvent(PointerEvent pointerEvent) {
 
 
-		if (pointerEvent.Type == PointerEventType.Select)
-			m_isSelected = true;
+			if (pointerEvent.Type == PointerEventType.Select)
+				m_isSelected = true;
 
-		else if (pointerEvent.Type == PointerEventType.Unselect)
-			m_isSelected = false;
+			else if (pointerEvent.Type == PointerEventType.Unselect)
+				m_isSelected = false;
+
+		}
+
+		public AudioClip GetExplanationVoiceOverClip() {
+			return m_audioDescription;
+		}
+
+		public bool IsCanExplain() => m_isSelected;
 
 	}
-
-	public AudioClip GetExplanationVoiceOverClip() {
-		return m_audioDescription;
-	}
-
-	public bool IsCanExplain() => m_isSelected;
 
 }

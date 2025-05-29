@@ -1,11 +1,15 @@
 using System.Collections.Generic;
-using UnityEngine;
+using BrandosLab.Chemical;
 
-public interface IChemicalContainer<T> where T : ChemicalBaseData {
+namespace BrandosLab.LabTools.Model {
 
-	public void AddChemical(ChemicalPortion<T> chemical);
-	public List<ChemicalPortion<T>> RemoveChemical(float volume);
-	public List<ChemicalPortion<T>> GetChemicalContents();
-	public float GetCurrentVolume();
+	public interface IChemicalContainer<T> where T : ChemicalBaseData {
+
+		public void AddChemical(ChemicalPortion<T> chemical);
+		public List<ChemicalPortion<T>> RemoveChemical(float volume);
+		public List<ChemicalPortion<T>> GetChemicalContents();
+		public float GetCurrentVolume();
+
+	}
 
 }

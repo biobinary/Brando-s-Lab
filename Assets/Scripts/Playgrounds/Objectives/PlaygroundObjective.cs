@@ -1,167 +1,171 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlaygroundObjective", menuName = "Scriptable Objects/Playground Objective")]
-public class PlaygroundObjective : ScriptableObject {
+namespace BrandosLab.Playgrounds.Objectives {
 
-	public event System.Action OnObjectiveCompleted;
+	[CreateAssetMenu(fileName = "PlaygroundObjective", menuName = "Scriptable Objects/Playground Objective")]
+	public class PlaygroundObjective : ScriptableObject {
 
-	[System.Serializable]
-	public class ObjectiveInstruction {
+		public event System.Action OnObjectiveCompleted;
 
-		public string instructions;
-		public AudioClip objectiveAudioHint;
-		public bool isComplete = false;
+		[System.Serializable]
+		public class ObjectiveInstruction {
 
-	}
+			public string instructions;
+			public AudioClip objectiveAudioHint;
+			public bool isComplete = false;
 
-	[SerializeField] private string m_objectiveIntroductionMonologueName;
-	[SerializeField] private List<ObjectiveInstruction> m_instructionList;
-
-	public string GetIntroductionMonologueName() => m_objectiveIntroductionMonologueName;
-	public IReadOnlyList<ObjectiveInstruction> GetObjectives() => m_instructionList;
-
-	public void ResetAllObjectives() {
-
-		if (m_instructionList == null || !(m_instructionList.Count > 0))
-			return;
-
-		foreach (ObjectiveInstruction instruction in m_instructionList) {
-			instruction.isComplete = false;
 		}
 
-	}
+		[SerializeField] private string m_objectiveIntroductionMonologueName;
+		[SerializeField] private List<ObjectiveInstruction> m_instructionList;
 
-	public void SetCompletion(string instruction) {
+		public string GetIntroductionMonologueName() => m_objectiveIntroductionMonologueName;
+		public IReadOnlyList<ObjectiveInstruction> GetObjectives() => m_instructionList;
 
-		if (string.IsNullOrEmpty(instruction))
-			return;
+		public void ResetAllObjectives() {
 
-		if (HasCompleted(instruction))
-			return;
+			if (m_instructionList == null || !(m_instructionList.Count > 0))
+				return;
 
-		ObjectiveInstruction currentObjective = null;
-
-		foreach (ObjectiveInstruction objective in m_instructionList) { 
-			if( string.Equals(objective.instructions, instruction)) {
-				currentObjective = objective;
-				break;
+			foreach (ObjectiveInstruction instruction in m_instructionList) {
+				instruction.isComplete = false;
 			}
+
 		}
 
-		if( currentObjective != null ) {
-			currentObjective.isComplete = true;
-			OnObjectiveCompleted.Invoke();
+		public void SetCompletion(string instruction) {
+
+			if (string.IsNullOrEmpty(instruction))
+				return;
+
+			if (HasCompleted(instruction))
+				return;
+
+			ObjectiveInstruction currentObjective = null;
+
+			foreach (ObjectiveInstruction objective in m_instructionList) {
+				if (string.Equals(objective.instructions, instruction)) {
+					currentObjective = objective;
+					break;
+				}
+			}
+
+			if (currentObjective != null) {
+				currentObjective.isComplete = true;
+				OnObjectiveCompleted.Invoke();
+			}
+
 		}
-			
-	}
 
-	public void SetCompletion(int idx) {
+		public void SetCompletion(int idx) {
 
-		if (idx < 0 || idx >= m_instructionList.Count)
-			return;
+			if (idx < 0 || idx >= m_instructionList.Count)
+				return;
 
-		if (HasCompleted(idx))
-			return;
+			if (HasCompleted(idx))
+				return;
 
-		ObjectiveInstruction currentObjective = m_instructionList[idx];
+			ObjectiveInstruction currentObjective = m_instructionList[idx];
 
-		if (currentObjective != null) {
-			currentObjective.isComplete = true;
-			OnObjectiveCompleted.Invoke();
+			if (currentObjective != null) {
+				currentObjective.isComplete = true;
+				OnObjectiveCompleted.Invoke();
+			}
+
 		}
 
-	}
+		public AudioClip GetAudioHint(string instruction) {
 
-	public AudioClip GetAudioHint(string instruction) {
-		
-		if (string.IsNullOrEmpty(instruction)) 
+			if (string.IsNullOrEmpty(instruction))
+				return null;
+
+			ObjectiveInstruction currentObjective = null;
+
+			foreach (ObjectiveInstruction objective in m_instructionList) {
+				if (string.Equals(objective.instructions, instruction)) {
+					currentObjective = objective;
+					break;
+				}
+			}
+
+			if (currentObjective != null) {
+				return currentObjective.objectiveAudioHint;
+			}
+
 			return null;
 
-		ObjectiveInstruction currentObjective = null;
+		}
 
-		foreach (ObjectiveInstruction objective in m_instructionList) {
-			if (string.Equals(objective.instructions, instruction)) {
-				currentObjective = objective;
-				break;
+		public AudioClip GetAudioHint(int idx) {
+
+			if (idx < 0 || idx >= m_instructionList.Count)
+				return null;
+
+			ObjectiveInstruction currentObjective = m_instructionList[idx];
+
+			if (currentObjective != null) {
+				return currentObjective.objectiveAudioHint;
 			}
-		}
 
-		if (currentObjective != null) {
-			return currentObjective.objectiveAudioHint;	
-		}
-
-		return null;
-
-	}
-
-	public AudioClip GetAudioHint(int idx) {
-		
-		if (idx < 0 || idx >= m_instructionList.Count)
 			return null;
 
-		ObjectiveInstruction currentObjective = m_instructionList[idx];
-
-		if (currentObjective != null) {
-			return currentObjective.objectiveAudioHint;
 		}
 
-		return null;
+		public bool HasCompleted(string instruction) {
 
-	}
+			if (string.IsNullOrEmpty(instruction))
+				return false;
 
-	public bool HasCompleted(string instruction) {
+			ObjectiveInstruction currentObjective = null;
 
-		if (string.IsNullOrEmpty(instruction))
-			return false;
-
-		ObjectiveInstruction currentObjective = null;
-
-		foreach (ObjectiveInstruction objective in m_instructionList) {
-			if (string.Equals(objective.instructions, instruction)) {
-				currentObjective = objective;
-				break;
+			foreach (ObjectiveInstruction objective in m_instructionList) {
+				if (string.Equals(objective.instructions, instruction)) {
+					currentObjective = objective;
+					break;
+				}
 			}
+
+			if (currentObjective != null)
+				return currentObjective.isComplete;
+
+			return false;
+
 		}
 
-		if (currentObjective != null)
-			return currentObjective.isComplete;
+		public bool HasCompleted(int idx) {
 
-		return false;
+			if (idx < 0 || idx >= m_instructionList.Count)
+				return false;
 
-	}
+			ObjectiveInstruction currentObjective = m_instructionList[idx];
 
-	public bool HasCompleted(int idx) {
+			if (currentObjective != null)
+				return currentObjective.isComplete;
 
-		if (idx < 0 || idx >= m_instructionList.Count)
 			return false;
 
-		ObjectiveInstruction currentObjective = m_instructionList[idx];
+		}
 
-		if (currentObjective != null)
-			return currentObjective.isComplete;
+		public bool HasInstruction(string instruction) {
 
-		return false;
+			if (string.IsNullOrEmpty(instruction))
+				return false;
 
-	}
-
-	public bool HasInstruction(string instruction) {
-		
-		if (string.IsNullOrEmpty(instruction))
-			return false;
-
-		foreach (ObjectiveInstruction objective in m_instructionList) {
-			if (string.Equals(objective.instructions, instruction)) {
-				return true;
+			foreach (ObjectiveInstruction objective in m_instructionList) {
+				if (string.Equals(objective.instructions, instruction)) {
+					return true;
+				}
 			}
+
+			return false;
+
 		}
 
-		return false;
+		public bool HasInstruction(int idx) {
+			return idx >= 0 && idx < m_instructionList.Count;
+		}
 
-	}
-
-	public bool HasInstruction(int idx) {
-		return idx >= 0 && idx < m_instructionList.Count;
 	}
 
 }

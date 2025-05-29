@@ -1,98 +1,104 @@
+using UnityEngine;
 using Oculus.Interaction;
 using TMPro;
-using UnityEngine;
+using BrandosLab.Chemical;
+using BrandosLab.LabTools.Model;
 
-public abstract class ContainerInfoCard<T> : MonoBehaviour where T : ChemicalBaseData {
+namespace BrandosLab.LabTools.Container {
 
-	[SerializeField, Interface(typeof(IPointable))]
-	protected UnityEngine.Object _pointable;
-	protected IPointable Pointable;
+	public abstract class ContainerInfoCard<T> : MonoBehaviour where T : ChemicalBaseData {
 
-	[SerializeField] private MonoBehaviour m_containerMonoBehaviour;
-	protected IChemicalContainer<T> m_mainContainer;
+		[SerializeField, Interface(typeof(IPointable))]
+		protected UnityEngine.Object _pointable;
+		protected IPointable Pointable;
 
-	[Header("UI Settings")]
-	[SerializeField] protected GameObject m_canvasGameObject;
-	[SerializeField] protected TextMeshProUGUI m_primaryLabel;
-	[SerializeField] protected TextMeshProUGUI m_secondaryLabel;
+		[SerializeField] private MonoBehaviour m_containerMonoBehaviour;
+		protected IChemicalContainer<T> m_mainContainer;
 
-	protected Transform m_mainCameraTransform;
-	protected bool m_isPicked = false;
+		[Header("UI Settings")]
+		[SerializeField] protected GameObject m_canvasGameObject;
+		[SerializeField] protected TextMeshProUGUI m_primaryLabel;
+		[SerializeField] protected TextMeshProUGUI m_secondaryLabel;
 
-	private void Awake() {
-		
-		Pointable = _pointable as IPointable;
-		if (m_containerMonoBehaviour != null) {
-			if (m_containerMonoBehaviour is IChemicalContainer<T>)
-				m_mainContainer = m_containerMonoBehaviour as IChemicalContainer<T>;
+		protected Transform m_mainCameraTransform;
+		protected bool m_isPicked = false;
+
+		private void Awake() {
+
+			Pointable = _pointable as IPointable;
+			if (m_containerMonoBehaviour != null) {
+				if (m_containerMonoBehaviour is IChemicalContainer<T>)
+					m_mainContainer = m_containerMonoBehaviour as IChemicalContainer<T>;
+			}
+
 		}
 
-	}
+		private void Start() {
 
-	private void Start() {
+			OVRCameraRig cameraRig = FindAnyObjectByType<OVRCameraRig>();
+			if (cameraRig != null) {
+				m_mainCameraTransform = cameraRig.centerEyeAnchor;
+			}
 
-		OVRCameraRig cameraRig = FindAnyObjectByType<OVRCameraRig>();
-		if (cameraRig != null) {
-			m_mainCameraTransform = cameraRig.centerEyeAnchor;
+			m_canvasGameObject.SetActive(false);
+
 		}
 
-		m_canvasGameObject.SetActive(false);
+		public void OnEnable() {
 
-	}
+			if (Pointable != null)
+				Pointable.WhenPointerEventRaised += OnHandlePointerEventRaised;
 
-	public void OnEnable() {
+		}
 
-		if (Pointable != null)
-			Pointable.WhenPointerEventRaised += OnHandlePointerEventRaised;
+		private void OnDisable() {
 
-	}
+			if (Pointable != null)
+				Pointable.WhenPointerEventRaised -= OnHandlePointerEventRaised;
 
-	private void OnDisable() {
+			m_canvasGameObject.SetActive(false);
 
-		if (Pointable != null)
-			Pointable.WhenPointerEventRaised -= OnHandlePointerEventRaised;
+		}
 
-		m_canvasGameObject.SetActive(false);
+		private void OnHandlePointerEventRaised(PointerEvent pointerEvent) {
 
-	}
+			switch (pointerEvent.Type) {
 
-	private void OnHandlePointerEventRaised(PointerEvent pointerEvent) {
+				case PointerEventType.Select:
+					m_isPicked = true;
+					m_canvasGameObject.SetActive(false);
+					break;
 
-		switch (pointerEvent.Type) {
-
-			case PointerEventType.Select:
-				m_isPicked = true;
-				m_canvasGameObject.SetActive(false);
-				break;
-
-			case PointerEventType.Unselect:
-				m_isPicked = false;
-				m_canvasGameObject.SetActive(true);
-				SetupLabel();
-				break;
-
-			case PointerEventType.Hover:
-
-				if (!m_isPicked) {
+				case PointerEventType.Unselect:
+					m_isPicked = false;
 					m_canvasGameObject.SetActive(true);
 					SetupLabel();
-				}
+					break;
 
-				break;
+				case PointerEventType.Hover:
 
-			case PointerEventType.Unhover:
-				m_canvasGameObject.SetActive(false);
-				break;
+					if (!m_isPicked) {
+						m_canvasGameObject.SetActive(true);
+						SetupLabel();
+					}
+
+					break;
+
+				case PointerEventType.Unhover:
+					m_canvasGameObject.SetActive(false);
+					break;
+
+			}
 
 		}
 
-	}
+		protected abstract void SetupLabel();
 
-	protected abstract void SetupLabel();
+		private void Update() {
+			Vector3 direction = (m_mainCameraTransform.position - transform.position).normalized;
+			transform.rotation = Quaternion.LookRotation(-direction);
+		}
 
-	private void Update() {
-		Vector3 direction = (m_mainCameraTransform.position - transform.position).normalized;
-		transform.rotation = Quaternion.LookRotation(-direction);
 	}
 
 }

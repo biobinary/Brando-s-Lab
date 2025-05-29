@@ -1,43 +1,49 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using BrandosLab.Playgrounds.Objectives;
+using BrandosLab.Character;
 
-public class ObjectiveUIComponent : MonoBehaviour {
+namespace BrandosLab.UI {
 
-	public PlaygroundObjective.ObjectiveInstruction instruction;
+	public class ObjectiveUIComponent : MonoBehaviour {
 
-	[Header("Component References")]
-	[SerializeField] private TextMeshProUGUI m_instructionLabel;
-	[SerializeField] private Toggle m_checkBox;
+		public PlaygroundObjective.ObjectiveInstruction instruction;
 
-	[Header("Button Helper")]
-	[SerializeField] private Toggle m_toggleHelper;
+		[Header("Component References")]
+		[SerializeField] private TextMeshProUGUI m_instructionLabel;
+		[SerializeField] private Toggle m_checkBox;
 
-	private void Awake() {
+		[Header("Button Helper")]
+		[SerializeField] private Toggle m_toggleHelper;
 
-		if ( m_toggleHelper == null )
-			return;
+		private void Awake() {
 
-		m_toggleHelper.onValueChanged.AddListener((value) => 
-			NPCProfessor.Instance.PlayMonologue(instruction.objectiveAudioHint));
+			if (m_toggleHelper == null)
+				return;
 
-	}
+			m_toggleHelper.onValueChanged.AddListener((value) =>
+				NPCProfessor.Instance.PlayMonologue(instruction.objectiveAudioHint));
 
-	private void Start() {
-		m_instructionLabel.text = instruction.instructions;
-		m_checkBox.isOn = instruction.isComplete;
-	}
+		}
 
-	public void SetNewInstruction(PlaygroundObjective.ObjectiveInstruction instruction) {
-		this.instruction = instruction;
-		m_instructionLabel.text = this.instruction.instructions;
-		m_checkBox.isOn = this.instruction.isComplete;
-	}
-
-	private void Update() {
-		if (instruction != null) {
+		private void Start() {
+			m_instructionLabel.text = instruction.instructions;
 			m_checkBox.isOn = instruction.isComplete;
 		}
+
+		public void SetNewInstruction(PlaygroundObjective.ObjectiveInstruction instruction) {
+			this.instruction = instruction;
+			m_instructionLabel.text = this.instruction.instructions;
+			m_checkBox.isOn = this.instruction.isComplete;
+		}
+
+		private void Update() {
+			if (instruction != null) {
+				m_checkBox.isOn = instruction.isComplete;
+			}
+		}
+
 	}
 
 }

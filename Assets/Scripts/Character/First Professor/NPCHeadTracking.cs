@@ -1,40 +1,44 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class NPCHeadTracking : MonoBehaviour {
+namespace BrandosLab.Character {
 
-    [SerializeField] private GameObject m_npcMainTransform;
-    [SerializeField] private Rig m_rig;
-	[SerializeField] private GameObject m_customTrackingTarget = null;
+	public class NPCHeadTracking : MonoBehaviour {
 
-    private Transform m_mainCameraTransform = null;
+		[SerializeField] private GameObject m_npcMainTransform;
+		[SerializeField] private Rig m_rig;
+		[SerializeField] private GameObject m_customTrackingTarget = null;
 
-	private void Start() {
+		private Transform m_mainCameraTransform = null;
 
-		OVRCameraRig cameraRig = FindAnyObjectByType<OVRCameraRig>();
-		if (cameraRig != null) {
-			m_mainCameraTransform = cameraRig.centerEyeAnchor;
-		}
+		private void Start() {
 
-		if (m_rig != null) {
-
-			if (m_mainCameraTransform == null) {
-				m_rig.weight = 0.0f;
-				return;
+			OVRCameraRig cameraRig = FindAnyObjectByType<OVRCameraRig>();
+			if (cameraRig != null) {
+				m_mainCameraTransform = cameraRig.centerEyeAnchor;
 			}
 
-			m_rig.weight = 1.0f;
+			if (m_rig != null) {
+
+				if (m_mainCameraTransform == null) {
+					m_rig.weight = 0.0f;
+					return;
+				}
+
+				m_rig.weight = 1.0f;
+
+			}
 
 		}
 
-	}
+		private void Update() {
 
-	private void Update() {
+			if (m_customTrackingTarget == null) return;
+			if (m_mainCameraTransform == null) return;
 
-		if (m_customTrackingTarget == null) return;
-		if (m_mainCameraTransform == null) return;
+			m_customTrackingTarget.transform.position = m_mainCameraTransform.position;
 
-		m_customTrackingTarget.transform.position = m_mainCameraTransform.position;
+		}
 
 	}
 

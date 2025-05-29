@@ -1,6 +1,8 @@
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using BrandosLab.Chemical;
+using BrandosLab.LabTools.Model;
 
 public class MetalSaltContainer : MonoBehaviour, IChemicalContainer<MetalSaltData> {
 

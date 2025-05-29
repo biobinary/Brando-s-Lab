@@ -1,37 +1,42 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using BrandosLab.Playgrounds.Tutorial;
 
-public class TutorialButton : MonoBehaviour {
+namespace BrandosLab.UI {
 
-	public PlaygroundTutorials.Tutorial tutorial;
+	public class TutorialButton : MonoBehaviour {
 
-	[Header("Component References")]
-	[SerializeField] private TextMeshProUGUI m_tutorialNameLabel;
-	[SerializeField] private Toggle m_button;
+		public PlaygroundTutorials.Tutorial tutorial;
 
-	private TutorialInfoMenu m_tutorialMenu;
+		[Header("Component References")]
+		[SerializeField] private TextMeshProUGUI m_tutorialNameLabel;
+		[SerializeField] private Toggle m_button;
 
-	private void Awake() {
+		private TutorialInfoMenu m_tutorialMenu;
 
-		m_button.onValueChanged.AddListener((value) => {
-			if( m_tutorialMenu != null ) {
-				m_tutorialMenu.OnHandleTutorialButtonPressed(this);
-			}
-		});
+		private void Awake() {
 
-	}
+			m_button.onValueChanged.AddListener((value) => {
+				if (m_tutorialMenu != null) {
+					m_tutorialMenu.OnHandleTutorialButtonPressed(this);
+				}
+			});
 
-	private void Start() {
-		m_tutorialNameLabel.text = tutorial.tutorialName;
-	}
+		}
 
-	public void SetupButton( TutorialInfoMenu menu, PlaygroundTutorials.Tutorial tutorial ) {
+		private void Start() {
+			m_tutorialNameLabel.text = tutorial.tutorialName;
+		}
 
-		m_tutorialMenu = menu;
+		public void SetupButton(TutorialInfoMenu menu, PlaygroundTutorials.Tutorial tutorial) {
 
-		this.tutorial = tutorial;
-		m_tutorialNameLabel.text = this.tutorial.tutorialName;
+			m_tutorialMenu = menu;
+
+			this.tutorial = tutorial;
+			m_tutorialNameLabel.text = this.tutorial.tutorialName;
+
+		}
 
 	}
 

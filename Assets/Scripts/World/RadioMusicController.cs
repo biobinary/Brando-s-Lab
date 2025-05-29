@@ -3,88 +3,92 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-public class RadioMusicController : MonoBehaviour {
+namespace BrandosLab.World {
 
-	[SerializeField] private TextMeshProUGUI m_volumeLabel;
-	[SerializeField] private Transform m_volumeKnob;
-	[SerializeField] private GrabInteractable m_grabInteractable;
+	public class RadioMusicController : MonoBehaviour {
 
-	[Header("Visual Settings")]
-	[SerializeField] private ParticleSystem m_musicalSpeakerLeft;
-	[SerializeField] private ParticleSystem m_musicalSpeakerRight;
+		[SerializeField] private TextMeshProUGUI m_volumeLabel;
+		[SerializeField] private Transform m_volumeKnob;
+		[SerializeField] private GrabInteractable m_grabInteractable;
 
-	private bool m_isEffectPlaying = false;
+		[Header("Visual Settings")]
+		[SerializeField] private ParticleSystem m_musicalSpeakerLeft;
+		[SerializeField] private ParticleSystem m_musicalSpeakerRight;
 
-	private void Update() {
+		private bool m_isEffectPlaying = false;
 
-		if (MusicManager.Instance == null || m_grabInteractable == null || m_volumeKnob == null) 
-			return;
-		
-		SetupVolumeLabel();
+		private void Update() {
 
-		if( m_grabInteractable.SelectingInteractorViews.Any() )
-			SetNewVolumeLevel();
-		else
-			SetupVolumeKnob();
+			if (MusicManager.Instance == null || m_grabInteractable == null || m_volumeKnob == null)
+				return;
 
-		if( MusicManager.Instance.IsPlaying() && !m_isEffectPlaying) {
-			m_isEffectPlaying = true;
-			m_musicalSpeakerLeft.Play();
-			m_musicalSpeakerRight.Play();
+			SetupVolumeLabel();
 
-		} else if( !MusicManager.Instance.IsPlaying() && m_isEffectPlaying ) {
-			m_isEffectPlaying = false;
-			m_musicalSpeakerLeft.Stop();
-			m_musicalSpeakerRight.Stop();
+			if (m_grabInteractable.SelectingInteractorViews.Any())
+				SetNewVolumeLevel();
+			else
+				SetupVolumeKnob();
+
+			if (MusicManager.Instance.IsPlaying() && !m_isEffectPlaying) {
+				m_isEffectPlaying = true;
+				m_musicalSpeakerLeft.Play();
+				m_musicalSpeakerRight.Play();
+
+			} else if (!MusicManager.Instance.IsPlaying() && m_isEffectPlaying) {
+				m_isEffectPlaying = false;
+				m_musicalSpeakerLeft.Stop();
+				m_musicalSpeakerRight.Stop();
+
+			}
 
 		}
 
-	}
+		private void SetupVolumeLabel() {
 
-	private void SetupVolumeLabel() {
-		
-		int musicPercentage = (int)(MusicManager.Instance.GetCurrentVolume() * 100.0f);
-		m_volumeLabel.text = $"Volume: {musicPercentage}%";
-	
-	}
+			int musicPercentage = (int)(MusicManager.Instance.GetCurrentVolume() * 100.0f);
+			m_volumeLabel.text = $"Volume: {musicPercentage}%";
 
-	private void SetupVolumeKnob() {
-
-		float newKnobRotation = Mathf.Lerp(-90.0f, 90.0f, MusicManager.Instance.GetCurrentVolume());
-		m_volumeKnob.localEulerAngles = new Vector3(
-			newKnobRotation,
-			m_volumeKnob.localEulerAngles.y,
-			m_volumeKnob.localEulerAngles.z 
-		);
-			
-	}
-
-	private void SetNewVolumeLevel() {
-
-		float t = Mathf.InverseLerp(
-			-90.0f, 
-			90.0f, 
-			GetNormalizedAngle(m_volumeKnob.localEulerAngles.x)
-		);
-
-		if (t < 0.01f) {
-			MusicManager.Instance.MuteMusic(true);
-			MusicManager.Instance.SetVolume(0.0f);
-		
-		} else {
-			MusicManager.Instance.MuteMusic(false);
-			MusicManager.Instance.SetVolume(t);
-		
 		}
 
-	}
+		private void SetupVolumeKnob() {
 
-	private float GetNormalizedAngle(float angle) {
-		
-		angle %= 360;
-		
-		if (angle > 180) angle -= 360;
-		return angle;
+			float newKnobRotation = Mathf.Lerp(-90.0f, 90.0f, MusicManager.Instance.GetCurrentVolume());
+			m_volumeKnob.localEulerAngles = new Vector3(
+				newKnobRotation,
+				m_volumeKnob.localEulerAngles.y,
+				m_volumeKnob.localEulerAngles.z
+			);
+
+		}
+
+		private void SetNewVolumeLevel() {
+
+			float t = Mathf.InverseLerp(
+				-90.0f,
+				90.0f,
+				GetNormalizedAngle(m_volumeKnob.localEulerAngles.x)
+			);
+
+			if (t < 0.01f) {
+				MusicManager.Instance.MuteMusic(true);
+				MusicManager.Instance.SetVolume(0.0f);
+
+			} else {
+				MusicManager.Instance.MuteMusic(false);
+				MusicManager.Instance.SetVolume(t);
+
+			}
+
+		}
+
+		private float GetNormalizedAngle(float angle) {
+
+			angle %= 360;
+
+			if (angle > 180) angle -= 360;
+			return angle;
+
+		}
 
 	}
 

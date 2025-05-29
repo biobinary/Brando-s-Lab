@@ -1,9 +1,11 @@
-using UnityEngine;
+namespace BrandosLab.Chemical {
 
-[System.Serializable]
-public class ChemicalPortion<T> where T : ChemicalBaseData {
+	[System.Serializable]
+	public class ChemicalPortion<T> where T : ChemicalBaseData {
 
-	public T data;
-	public float volume; // In mL
+		public T data;
+		public float volume; // In mL
+
+	}
 
 }

@@ -1,93 +1,95 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using BrandosLab.World;
+using BrandosLab.Chemical;
 
-public class NeutralizationChecker : MonoBehaviour {
+namespace BrandosLab.LabTools.Container.Liquid {
 
-	[SerializeField] private float m_phTolerance = 0.25f;
-	[SerializeField] private float m_confirmationCheckTimer = 0.25f;
+	public class NeutralizationChecker : MonoBehaviour {
 
-	[Header("Objectives")]
-	[SerializeField] private PlaygroundObjective m_currentObjectives;
+		[SerializeField] private float m_phTolerance = 0.25f;
+		[SerializeField] private float m_confirmationCheckTimer = 0.25f;
 
-	public bool confirmationDelayIsOnProgress { get; private set; } = false;
-	private Coroutine m_delayCheckerCoroutine = null;
+		public bool confirmationDelayIsOnProgress { get; private set; } = false;
+		private Coroutine m_delayCheckerCoroutine = null;
 
-	[System.Serializable]
-	public struct NeutralizationPair {
+		[System.Serializable]
+		public struct NeutralizationPair {
 
-		public string objectiveMessage;
-		public ChemicalData acid;
-		public ChemicalData baseCompound;
+			public string objectiveMessage;
+			public ChemicalData acid;
+			public ChemicalData baseCompound;
 
-		public bool Matches(ChemicalData a, ChemicalData b) {
-			return (a == acid && b == baseCompound) || (a == baseCompound && b == acid);
-		
-		}
-
-	}
-
-	[Header("Valid Neutralization Pairs")]
-	[SerializeField] private List<NeutralizationPair> m_validPairs;
-
-	public void StartNeutralizationConfirmation(float currentPH, List<ChemicalPortion<ChemicalData>> contents) {
-
-		bool isNeutral = Mathf.Abs(currentPH - 7.0f) <= m_phTolerance;
-		if ( !isNeutral )
-			return;
-
-		ChemicalData acid = null;
-		ChemicalData baseCompound = null;
-
-		foreach (ChemicalPortion<ChemicalData> chem in contents) {
-
-			switch (chem.data.type) {
-
-				case ChemicalData.Type.ACID:
-
-					if (acid != null)
-						return;
-
-					acid = chem.data;
-					break;
-
-				case ChemicalData.Type.BASE:
-
-					if (baseCompound != null)
-						return;
-
-					baseCompound = chem.data;
-					break;
+			public bool Matches(ChemicalData a, ChemicalData b) {
+				return (a == acid && b == baseCompound) || (a == baseCompound && b == acid);
 
 			}
 
 		}
 
-		foreach (NeutralizationPair pair in m_validPairs) {
-			if (pair.Matches(acid, baseCompound))
-				m_delayCheckerCoroutine = StartCoroutine(StartConfirmationTimer(pair.objectiveMessage));
+		[Header("Valid Neutralization Pairs")]
+		[SerializeField] private List<NeutralizationPair> m_validPairs;
+
+		public void StartNeutralizationConfirmation(float currentPH, List<ChemicalPortion<ChemicalData>> contents) {
+
+			bool isNeutral = Mathf.Abs(currentPH - 7.0f) <= m_phTolerance;
+			if (!isNeutral)
+				return;
+
+			ChemicalData acid = null;
+			ChemicalData baseCompound = null;
+
+			foreach (ChemicalPortion<ChemicalData> chem in contents) {
+
+				switch (chem.data.type) {
+
+					case ChemicalData.Type.ACID:
+
+						if (acid != null)
+							return;
+
+						acid = chem.data;
+						break;
+
+					case ChemicalData.Type.BASE:
+
+						if (baseCompound != null)
+							return;
+
+						baseCompound = chem.data;
+						break;
+
+				}
+
+			}
+
+			foreach (NeutralizationPair pair in m_validPairs) {
+				if (pair.Matches(acid, baseCompound))
+					m_delayCheckerCoroutine = StartCoroutine(StartConfirmationTimer(pair.objectiveMessage));
+			}
+
+			return;
+
 		}
 
-		return;
+		public void StopConfirmationDelayTimeout() {
 
-	}
+			if (m_delayCheckerCoroutine != null)
+				StopCoroutine(m_delayCheckerCoroutine);
 
-	public void StopConfirmationDelayTimeout() {
-		
-		if( m_delayCheckerCoroutine != null )
-			StopCoroutine( m_delayCheckerCoroutine );
+			m_delayCheckerCoroutine = null;
+			confirmationDelayIsOnProgress = false;
 
-		m_delayCheckerCoroutine = null;
-		confirmationDelayIsOnProgress = false;
+		}
 
-	}
+		private IEnumerator StartConfirmationTimer(string objectiveMessage) {
+			confirmationDelayIsOnProgress = true;
+			yield return new WaitForSeconds(m_confirmationCheckTimer);
+			confirmationDelayIsOnProgress = false;
+			ObjectiveCompletionManager.Instance.SetObjectiveCompletion(objectiveMessage);
+		}
 
-	private IEnumerator StartConfirmationTimer(string objectiveMessage) {
-		confirmationDelayIsOnProgress = true;
-		yield return new WaitForSeconds(m_confirmationCheckTimer);
-		confirmationDelayIsOnProgress = false;
-		m_currentObjectives.SetCompletion(objectiveMessage);
 	}
 
 }

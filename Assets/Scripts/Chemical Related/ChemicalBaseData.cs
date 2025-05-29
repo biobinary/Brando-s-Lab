@@ -1,21 +1,26 @@
 using UnityEngine;
+using BrandosLab.LabTools.Model;
 
-public abstract class ChemicalBaseData : ScriptableObject, IExplainableChemical {
+namespace BrandosLab.Chemical {
 
-	public bool hasBeenExplained { get; set; } = false;
-	AudioClip IExplainableChemical.audioDescription => audioDescription;
+	public abstract class ChemicalBaseData : ScriptableObject, IExplainableChemical {
 
-	[Header("Chemical Identity")]
-	public string chemicalName;
-	public string formula;
+		public bool hasBeenExplained { get; set; } = false;
+		AudioClip IExplainableChemical.audioDescription => audioDescription;
 
-	[Header("Description")]
-	[TextArea(1, 10)]
-	public string description;
-	public AudioClip audioDescription;
+		[Header("Chemical Identity")]
+		public string chemicalName;
+		public string formula;
 
-	private void OnEnable() {
-		hasBeenExplained = false;
+		[Header("Description")]
+		[TextArea(1, 10)]
+		public string description;
+		public AudioClip audioDescription;
+
+		private void OnEnable() {
+			hasBeenExplained = false;
+		}
+
 	}
 
 }

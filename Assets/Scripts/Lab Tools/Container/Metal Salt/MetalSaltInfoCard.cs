@@ -1,27 +1,33 @@
 using System.Collections.Generic;
+using BrandosLab.Chemical;
+using BrandosLab.LabTools.Container;
 
-public class MetalSaltInfoCard : ContainerInfoCard<MetalSaltData> {
-	
-	protected override void SetupLabel() {
-		
-		List<ChemicalPortion<MetalSaltData>> salts = m_mainContainer.GetChemicalContents();
-		MetalSaltData salt = salts?.Count > 0 ? salts[0].data : null;
+namespace BrandosLab.LabTools.Container.MetalSalt {
 
-		if (salt != null && salt.hasBeenExplained) {
+	public class MetalSaltInfoCard : ContainerInfoCard<MetalSaltData> {
 
-			if (m_primaryLabel != null)
-				m_primaryLabel.text = salt.formula;
+		protected override void SetupLabel() {
 
-			if( m_secondaryLabel != null )
-				m_secondaryLabel.text = salt.GetColorName();
+			List<ChemicalPortion<MetalSaltData>> salts = m_mainContainer.GetChemicalContents();
+			MetalSaltData salt = salts?.Count > 0 ? salts[0].data : null;
 
-		} else {
+			if (salt != null && salt.hasBeenExplained) {
 
-			if (m_primaryLabel != null)
-				m_primaryLabel.text = "?";
+				if (m_primaryLabel != null)
+					m_primaryLabel.text = salt.formula;
 
-			if (m_secondaryLabel != null)
-				m_secondaryLabel.text = string.Empty;
+				if (m_secondaryLabel != null)
+					m_secondaryLabel.text = salt.GetColorName();
+
+			} else {
+
+				if (m_primaryLabel != null)
+					m_primaryLabel.text = "?";
+
+				if (m_secondaryLabel != null)
+					m_secondaryLabel.text = string.Empty;
+
+			}
 
 		}
 

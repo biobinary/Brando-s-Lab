@@ -1,57 +1,63 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
+using BrandosLab.Playgrounds;
+using BrandosLab.Playgrounds.Objectives;
 
-public class ObjectiveCompletionManager : MonoBehaviour {
+namespace BrandosLab.World {
 
-	[SerializeField] private float m_completionDelayDuration = 0.5f;
+	public class ObjectiveCompletionManager : MonoBehaviour {
 
-	public static ObjectiveCompletionManager Instance;
+		[SerializeField] private float m_completionDelayDuration = 0.5f;
 
-	private PlaygroundObjective m_currentObjectives = null;
+		public static ObjectiveCompletionManager Instance;
 
-	private void Awake() {
+		private PlaygroundObjective m_currentObjectives = null;
 
-		if (Instance == null) {
-			Instance = this;
-		
-		} else if (Instance != null && Instance != this) {
-			Destroy(gameObject);
-			
+		private void Awake() {
+
+			if (Instance == null) {
+				Instance = this;
+
+			} else if (Instance != null && Instance != this) {
+				Destroy(gameObject);
+
+			}
+
 		}
 
-	}
+		private void Start() {
+			PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
+		}
 
-	private void Start() {
-		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
-	}
+		private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
 
-	private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
+			m_currentObjectives = null;
 
-		m_currentObjectives = null;
+			if (env == null)
+				return;
 
-		if (env == null)
-			return;
+			PlaygroundObjective objective = env.GetObjective();
+			if (objective == null)
+				return;
 
-		PlaygroundObjective objective = env.GetObjective();
-		if (objective == null)
-			return;
+			m_currentObjectives = objective;
 
-		m_currentObjectives = objective;
+		}
 
-	}
+		public void SetObjectiveCompletion(string instruction) {
+			if (m_currentObjectives == null) return;
+			StartCoroutine(CompletionDelay(instruction));
+		}
 
-	public void SetObjectiveCompletion(string instruction) {
-		if( m_currentObjectives == null) return;
-		StartCoroutine(CompletionDelay(instruction));
-	}
-
-	private IEnumerator CompletionDelay(string instruction) {
-		yield return new WaitForSeconds(m_completionDelayDuration);
-		if( m_currentObjectives.HasInstruction(instruction)) {
-			if(!m_currentObjectives.HasCompleted(instruction)) {
-				m_currentObjectives.SetCompletion(instruction);
+		private IEnumerator CompletionDelay(string instruction) {
+			yield return new WaitForSeconds(m_completionDelayDuration);
+			if (m_currentObjectives.HasInstruction(instruction)) {
+				if (!m_currentObjectives.HasCompleted(instruction)) {
+					m_currentObjectives.SetCompletion(instruction);
+				}
 			}
 		}
+
 	}
 
 }

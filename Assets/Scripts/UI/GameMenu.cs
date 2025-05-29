@@ -1,58 +1,63 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using BrandosLab.Playgrounds;
 
-public class GameMenu : MonoBehaviour {
+namespace BrandosLab.UI {
 
-	[SerializeField] private GameObject m_canvasRoot;
-	[SerializeField] private GameObject m_tutorialMenu;
-	[SerializeField] private GameObject m_objectiveMenu;
- 
-	[Header("Environtment Information")]
-	[SerializeField] private GameObject m_environmentInformationContent;
-	[SerializeField] private TextMeshProUGUI m_environtmentInformationTitle;
+	public class GameMenu : MonoBehaviour {
 
-	[Header("Game Related Buttons")]
-	[SerializeField] private Toggle m_resetButton;
-	[SerializeField] private Toggle m_backToSelectionButton;
+		[SerializeField] private GameObject m_canvasRoot;
+		[SerializeField] private GameObject m_tutorialMenu;
+		[SerializeField] private GameObject m_objectiveMenu;
 
-	private void Awake() {
+		[Header("Environtment Information")]
+		[SerializeField] private GameObject m_environmentInformationContent;
+		[SerializeField] private TextMeshProUGUI m_environtmentInformationTitle;
 
-		m_resetButton.onValueChanged.AddListener((value) => 
-			PlaygroundEnvironmentManager.Instance.ResetEnvirontment());
+		[Header("Game Related Buttons")]
+		[SerializeField] private Toggle m_resetButton;
+		[SerializeField] private Toggle m_backToSelectionButton;
 
-		m_backToSelectionButton.onValueChanged.AddListener((value) => 
-			PlaygroundEnvironmentManager.Instance.ClearEnvironment());
+		private void Awake() {
 
-		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
-		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
+			m_resetButton.onValueChanged.AddListener((value) =>
+				PlaygroundEnvironmentManager.Instance.ResetEnvirontment());
 
-		m_tutorialMenu.SetActive(true);
-		m_objectiveMenu.SetActive(true);
+			m_backToSelectionButton.onValueChanged.AddListener((value) =>
+				PlaygroundEnvironmentManager.Instance.ClearEnvironment());
 
-	}
+			PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
+			PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
 
-	private void Start() {
+			m_tutorialMenu.SetActive(true);
+			m_objectiveMenu.SetActive(true);
 
-		m_tutorialMenu.SetActive(false);
-		m_objectiveMenu.SetActive(true);
-		m_canvasRoot.SetActive(false);
+		}
 
-	}
+		private void Start() {
 
-	private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
+			m_tutorialMenu.SetActive(false);
+			m_objectiveMenu.SetActive(true);
+			m_canvasRoot.SetActive(false);
 
-		m_canvasRoot.SetActive(true);
+		}
 
-		if( env != null )
-			m_environtmentInformationTitle.text = env.gameObject.name;
-		else
-			m_environtmentInformationTitle.text = "Unknown Environtment";
+		private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
 
-	}
+			m_canvasRoot.SetActive(true);
 
-	private void OnEnvironmentDestroyed() {
-		m_canvasRoot.SetActive(false);
+			if (env != null)
+				m_environtmentInformationTitle.text = env.gameObject.name;
+			else
+				m_environtmentInformationTitle.text = "Unknown Environtment";
+
+		}
+
+		private void OnEnvironmentDestroyed() {
+			m_canvasRoot.SetActive(false);
+		}
+
 	}
 
 }

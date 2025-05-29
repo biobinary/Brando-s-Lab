@@ -1,80 +1,87 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using BrandosLab.Effects;
+using BrandosLab.Chemical;
+using BrandosLab.LabTools.Model;
 
-public class PHMeterGun : TriggerBasedTool {
+namespace BrandosLab.LabTools {
 
-	[SerializeField] private TextMeshProUGUI m_phInfoCard;
-	[SerializeField] private BeamDetectorEffect m_beamDetector;
-	[SerializeField] private GameObject m_lightDetectorEffect;
+	public class PHMeterGun : TriggerBasedTool {
 
-	private IChemicalContainer<ChemicalData> m_currentContainer;
+		[SerializeField] private TextMeshProUGUI m_phInfoCard;
+		[SerializeField] private BeamDetectorEffect m_beamDetector;
+		[SerializeField] private GameObject m_lightDetectorEffect;
 
-	protected override void OnHandleTriggerPressed() {
-		m_beamDetector.ActivateBeam();
-		m_lightDetectorEffect.SetActive(true);
-	}
+		private IChemicalContainer<ChemicalData> m_currentContainer;
 
-	protected override void OnHandleTriggerReleased() {
-		m_beamDetector.DisableBeam();
-		m_lightDetectorEffect.SetActive(false);
-		m_currentContainer = null;
-	}
-
-	private void OnTriggerEnter(Collider other) {
-		
-		if( TryGetContainer(other, out IChemicalContainer<ChemicalData> container) ) {
-			
-			if (m_currentContainer == null)
-				m_currentContainer = container;
-
+		protected override void OnHandleTriggerPressed() {
+			m_beamDetector.ActivateBeam();
+			m_lightDetectorEffect.SetActive(true);
 		}
 
-	}
-
-	private void OnTriggerExit(Collider other) {
-		if (TryGetContainer(other, out IChemicalContainer<ChemicalData> container)) {
-			if (m_currentContainer == container)
-				m_currentContainer = null;
+		protected override void OnHandleTriggerReleased() {
+			m_beamDetector.DisableBeam();
+			m_lightDetectorEffect.SetActive(false);
+			m_currentContainer = null;
 		}
-	}
 
-	private bool TryGetContainer(
-		Collider other, 
-		out IChemicalContainer<ChemicalData> container) {
+		private void OnTriggerEnter(Collider other) {
 
-		container = null;
+			if (TryGetContainer(other, out IChemicalContainer<ChemicalData> container)) {
 
-		Rigidbody currentObjectRB = other.attachedRigidbody;
-		if (currentObjectRB == null)
-			return false;
+				if (m_currentContainer == null)
+					m_currentContainer = container;
 
-		if (currentObjectRB.TryGetComponent(out container))
-			return true;
-
-		return false;
-	
-	}
-
-	protected override void Update() {
-		
-		base.Update();
-
-		if (m_currentContainer != null) {
-
-			List<ChemicalPortion<ChemicalData>> contents = m_currentContainer.GetChemicalContents();
-			float currentVolume = m_currentContainer.GetCurrentVolume();
-			float containerPH = PHManager.CalCulatePH(contents, currentVolume);
-
-			if( m_phInfoCard != null ) {
-				string formattedStr = containerPH.ToString("F3");
-				m_phInfoCard.text = formattedStr;
 			}
 
-		} else {
+		}
 
-			if (m_phInfoCard != null)
-				m_phInfoCard.text = "Tidak ada objek";
+		private void OnTriggerExit(Collider other) {
+			if (TryGetContainer(other, out IChemicalContainer<ChemicalData> container)) {
+				if (m_currentContainer == container)
+					m_currentContainer = null;
+			}
+		}
+
+		private bool TryGetContainer(
+			Collider other,
+			out IChemicalContainer<ChemicalData> container) {
+
+			container = null;
+
+			Rigidbody currentObjectRB = other.attachedRigidbody;
+			if (currentObjectRB == null)
+				return false;
+
+			if (currentObjectRB.TryGetComponent(out container))
+				return true;
+
+			return false;
+
+		}
+
+		protected override void Update() {
+
+			base.Update();
+
+			if (m_currentContainer != null) {
+
+				List<ChemicalPortion<ChemicalData>> contents = m_currentContainer.GetChemicalContents();
+				float currentVolume = m_currentContainer.GetCurrentVolume();
+				float containerPH = PHManager.CalCulatePH(contents, currentVolume);
+
+				if (m_phInfoCard != null) {
+					string formattedStr = containerPH.ToString("F3");
+					m_phInfoCard.text = formattedStr;
+				}
+
+			} else {
+
+				if (m_phInfoCard != null)
+					m_phInfoCard.text = "Tidak ada objek";
+
+			}
 
 		}
 

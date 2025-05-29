@@ -1,47 +1,53 @@
 using UnityEngine;
+using BrandosLab.Playgrounds;
+using BrandosLab.Playgrounds.Objectives;
 
-public class ObjectiveList : MonoBehaviour {
+namespace BrandosLab.UI {
 
-	[SerializeField] private GameObject m_objectiveUIComponent;
-	[SerializeField] private Transform m_desiredSpawnTransform;
+	public class ObjectiveList : MonoBehaviour {
 
-	private Transform m_spawnTransform;
+		[SerializeField] private GameObject m_objectiveUIComponent;
+		[SerializeField] private Transform m_desiredSpawnTransform;
 
-	private void Awake() {
-		
-		PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
-		PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
+		private Transform m_spawnTransform;
 
-		m_spawnTransform = m_desiredSpawnTransform != null ? m_desiredSpawnTransform : transform;
+		private void Awake() {
 
-	}
+			PlaygroundEnvironmentManager.Instance.OnLoadEnvironment += OnEnvironmentLoaded;
+			PlaygroundEnvironmentManager.Instance.OnDestroyEnvironment += OnEnvironmentDestroyed;
 
-	private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
-
-		if (env == null)
-			return;
-
-		PlaygroundObjective objective = env.GetObjective();
-		if( objective == null) 
-			return;
-
-		PlaygroundObjective currentObjective = objective;
-
-		foreach ( PlaygroundObjective.ObjectiveInstruction instruction in
-				  currentObjective.GetObjectives()) {
-
-			GameObject componentGameObject = Instantiate(m_objectiveUIComponent, m_spawnTransform);
-			ObjectiveUIComponent uiComponent = componentGameObject.GetComponent<ObjectiveUIComponent>();
-			uiComponent.SetNewInstruction(instruction);
+			m_spawnTransform = m_desiredSpawnTransform != null ? m_desiredSpawnTransform : transform;
 
 		}
 
-	}
+		private void OnEnvironmentLoaded(PlaygroundEnvironment env) {
 
-	private void OnEnvironmentDestroyed() {
+			if (env == null)
+				return;
 
-		foreach (Transform child in m_spawnTransform) {
-			Destroy(child.gameObject);
+			PlaygroundObjective objective = env.GetObjective();
+			if (objective == null)
+				return;
+
+			PlaygroundObjective currentObjective = objective;
+
+			foreach (PlaygroundObjective.ObjectiveInstruction instruction in
+					  currentObjective.GetObjectives()) {
+
+				GameObject componentGameObject = Instantiate(m_objectiveUIComponent, m_spawnTransform);
+				ObjectiveUIComponent uiComponent = componentGameObject.GetComponent<ObjectiveUIComponent>();
+				uiComponent.SetNewInstruction(instruction);
+
+			}
+
+		}
+
+		private void OnEnvironmentDestroyed() {
+
+			foreach (Transform child in m_spawnTransform) {
+				Destroy(child.gameObject);
+			}
+
 		}
 
 	}

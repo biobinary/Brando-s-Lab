@@ -1,7 +1,11 @@
-public interface IBurnable {
+namespace BrandosLab.LabTools.Model {
 
-	void StartBurning();
-	void StopBurning();
-	bool IsBurning { get; }
+	public interface IBurnable {
+
+		void StartBurning();
+		void StopBurning();
+		bool IsBurning { get; }
+
+	}
 
 }

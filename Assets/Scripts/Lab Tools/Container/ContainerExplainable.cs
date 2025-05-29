@@ -1,62 +1,69 @@
-using Oculus.Interaction;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+using Oculus.Interaction;
+using BrandosLab.World;
+using BrandosLab.Chemical;
+using BrandosLab.LabTools.Model;
 
-public class ContainerExplainable : MonoBehaviour, IExplainable {
+namespace BrandosLab.LabTools.Container {
 
-	[SerializeField] private MonoBehaviour chemicalContainer;
+	public class ContainerExplainable : MonoBehaviour, IExplainable {
 
-	private bool m_isSelected = false;
+		[SerializeField] private MonoBehaviour chemicalContainer;
 
-	public void OnHandleSelectedEvent(PointerEvent pointerEvent) {
+		private bool m_isSelected = false;
 
-		if (pointerEvent.Type == PointerEventType.Select)
-			m_isSelected = true;
+		public void OnHandleSelectedEvent(PointerEvent pointerEvent) {
 
-		else if (pointerEvent.Type == PointerEventType.Unselect)
-			m_isSelected = false;
+			if (pointerEvent.Type == PointerEventType.Select)
+				m_isSelected = true;
 
-	}
-
-	public AudioClip GetExplanationVoiceOverClip() {
-
-		if (chemicalContainer is IChemicalContainer<ChemicalData> chemContainer) {
-			return GetAudioClipFromContainer(chemContainer);
-
-		} else if (chemicalContainer is IChemicalContainer<MetalSaltData> saltContainer) {
-			return GetAudioClipFromContainer(saltContainer);
+			else if (pointerEvent.Type == PointerEventType.Unselect)
+				m_isSelected = false;
 
 		}
 
-		return null;
+		public AudioClip GetExplanationVoiceOverClip() {
 
-	}
+			if (chemicalContainer is IChemicalContainer<ChemicalData> chemContainer) {
+				return GetAudioClipFromContainer(chemContainer);
 
-	private AudioClip GetAudioClipFromContainer<T>(IChemicalContainer<T> container) where T : ChemicalBaseData {
-		
-		List<ChemicalPortion<T>> chems = container.GetChemicalContents();
-		T chemicalData = chems?.Count > 0 ? chems[0].data : null;
+			} else if (chemicalContainer is IChemicalContainer<MetalSaltData> saltContainer) {
+				return GetAudioClipFromContainer(saltContainer);
 
-		if (chemicalData != null) {
-			chemicalData.hasBeenExplained = true;
-			MarkChemicalIdentificationObjective(chemicalData);
-			return chemicalData.audioDescription;
+			}
+
+			return null;
+
 		}
-		
-		return null;
 
-	}
+		private AudioClip GetAudioClipFromContainer<T>(IChemicalContainer<T> container) where T : ChemicalBaseData {
 
-	public bool IsCanExplain() => m_isSelected;
+			List<ChemicalPortion<T>> chems = container.GetChemicalContents();
+			T chemicalData = chems?.Count > 0 ? chems[0].data : null;
 
-	private void MarkChemicalIdentificationObjective<T>(T chemicalData) where T : ChemicalBaseData {
+			if (chemicalData != null) {
+				chemicalData.hasBeenExplained = true;
+				MarkChemicalIdentificationObjective(chemicalData);
+				return chemicalData.audioDescription;
+			}
 
-		string chemicalFormula = chemicalData.formula;
-		if (string.IsNullOrEmpty(chemicalFormula)) 
-			return;
+			return null;
 
-		string objectiveText = $"Identifikasi Senyawa {chemicalFormula}";
-		ObjectiveCompletionManager.Instance.SetObjectiveCompletion(objectiveText);
+		}
+
+		public bool IsCanExplain() => m_isSelected;
+
+		private void MarkChemicalIdentificationObjective<T>(T chemicalData) where T : ChemicalBaseData {
+
+			string chemicalFormula = chemicalData.formula;
+			if (string.IsNullOrEmpty(chemicalFormula))
+				return;
+
+			string objectiveText = $"Identifikasi Senyawa {chemicalFormula}";
+			ObjectiveCompletionManager.Instance.SetObjectiveCompletion(objectiveText);
+
+		}
 
 	}
 

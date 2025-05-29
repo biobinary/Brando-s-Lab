@@ -1,9 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+using BrandosLab.Chemical;
 
-public interface IPourable<T> where T : ChemicalBaseData {
+namespace BrandosLab.LabTools.Model {
 
-    public void PourObject(List<ChemicalPortion<T>> chemicals, Vector3 pourLocation);
-    public Object GetObjectAttached();
+    public interface IPourable<T> where T : ChemicalBaseData {
+
+        public void PourObject(List<ChemicalPortion<T>> chemicals, Vector3 pourLocation);
+        public Object GetObjectAttached();
+
+    }
 
 }
